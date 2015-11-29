@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>WALDO:</p>
+
+<img src="WheresWaldo/puzzle.jpg" id="puzzle" usemap="#planetmap" style="width:145px;height:126px;">
+<div>
+<input id="inp" type='file' />
+<input type='button' value = "submit" onclick="msg()"></input>
+</div>
+<p id = "test">height</p>
+<img id ='puz'></image>
+<script>
+// var image = document.getElementById("inp"); 
+function msg() {
+    var input_im =document.getElementById("inp");
+    console.log(input_im.value);
+    
+    var image = document.getElementById("puzzle"); 
+    var width = image.clientWidth;
+	console.log(width);
+    image.src = input_im.value;
+	width = image.clientWidth;
+	// var height = image.clientHeight;
+	console.log(width);
+}
+
+</script>
+
+<!--<script>
+var image = document.getElementById("puzzle"); 
+var width = image.clientWidth;
+var height = image.clientHeight;
+</script>-->
+
+
+<!-- <map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm">
+  <area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm">
+  <area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm">
+</map> -->
+
+</body>
+</html>
