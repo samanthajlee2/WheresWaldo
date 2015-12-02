@@ -1,32 +1,68 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <link rel="shortcut icon" href="/waldoheadcon.ico" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="Waldo.css">
 
-<p>WALDO:</p>
-
-<img src="WheresWaldo/puzzle.jpg" id="puzzle" usemap="#planetmap" style="width:145px;height:126px;">
-<div>
-<input id="inp" type='file' />
-<input type='button' value = "submit" onclick="msg()"></input>
-</div>
-<p id = "test">height</p>
-<img id ='puz'></image>
-<script>
-// var image = document.getElementById("inp"); 
-function msg() {
-    var input_im =document.getElementById("inp");
-    console.log(input_im.value);
+        <title>
+            Where's Waldo Assistant
+        </title>
+    </head>
+    <body>
+        <h3>Where's Waldo Assistant</h3>
+        
+        <div id="filter">
+            <form action="demo_form.asp">
+              <label><input type='checkbox' value="ooone" onclick='onCheck(this);'>Filter One</label> <br>
+              <label><input type='checkbox' value="two" onclick='onCheck(this);'>Filter Two</label> <br>
+              <label><input type='checkbox' value="three" onclick='onCheck(this);'>Filter Three</label> <br>
+              <label><input type='checkbox' value="four" onclick='onCheck(this);'>Filter Four</label> <br>
+            </form>
+        </div>
+        
+        <div id="puzzle_css">
+            <input id="inp" type='file' />
+            <input type='button' value = "submit" onclick="msg()"></input>
+            <img src="puzzle.jpg" id="puzzle" usemap="#planetmap">
+        </div>
     
-    var image = document.getElementById("puzzle"); 
-    var width = image.clientWidth;
-	console.log(width);
-    image.src = input_im.value;
-	width = image.clientWidth;
-	// var height = image.clientHeight;
-	console.log(width);
-}
+        <script>
+        function msg() {
+            var input_im = document.getElementById("newpuzzle");
+            console.log(input_im.value);
 
-</script>
+            var image = document.getElementById("puzzle"); 
+            var width = image.clientWidth;
+            console.log(width);
+            image.src = input_im.value;
+            width = image.clientWidth;
+            console.log(width);
+        }
+            
+        function onCheck(filter) {
+            if (filter.checked){
+                addFilter(filter.value);
+            } else {
+                removeFilter(filter.value);
+            }
+        }
+        
+        function addFilter(filterName) {
+            alert("ADD filter: " + filterName);
+        }
+            
+        function removeFilter(filterName) {
+            alert("REMOVE filter: " + filterName);
+        }
+            
+        </script>
+
+    </body>
+
+</html>
+
+
+
 
 <!--<script>
 var image = document.getElementById("puzzle"); 
@@ -40,6 +76,3 @@ var height = image.clientHeight;
   <area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm">
   <area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm">
 </map> -->
-
-</body>
-</html>
