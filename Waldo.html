@@ -4,8 +4,8 @@
     <meta content="utf-8" http-equiv="encoding">
     <head>
         <link rel="shortcut icon" href="/waldoheadcon.ico" type="image/x-icon" />
-        <link rel="stylesheet" type="text/css" href="Waldo.css">
-        <script src="Waldo.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/Waldo.css">
+        <script type="text/javascript" src="js/Waldo2.js"></script>
         <script type="text/javascript" src="js/waldo.js"></script>
         <script type="text/javascript" src="https://raw.githubusercontent.com/phoboslab/WebGLImageFilter/master/webgl-image-filter.js"></script>
 
@@ -18,14 +18,12 @@
         
         <div id="filter">
             <button id="showRed" value="Show Red" onclick="ShowRed(image);">Click to Show Red!</button>
-            <input type="range" value=0 min=0 max=360 onchange="val = this.value;">Adjust Hue Filter Setting</input>
+            <input type="range" value=0 min=0 max=360 onchange="val = this.value;">Adjust Hue Filter Setting</input><br>
             
-            <form action="demo_form.asp">
               <label><input type='checkbox' value="ooone" onclick='onCheck(this);'>Filter One</label> <br>
               <label><input type='checkbox' value="two" onclick='onCheck(this);'>Filter Two</label> <br>
               <label><input type='checkbox' value="three" onclick='onCheck(this);'>Filter Three</label> <br>
               <label><input type='checkbox' value="crop" onclick='onCheck(this);'>Mask Make Search Area Smaller</label> <br>
-            </form>
         
         </div>
 

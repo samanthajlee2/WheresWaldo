@@ -1,9 +1,8 @@
 
+
 function uploadpic() {
-    canvas = document.getElementById("image_canvas");
+    var canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
-    //console.log(image.height);
-    //console.log(image.width);
     try {
         filter = new WebGLImageFilter();
     }
@@ -14,23 +13,11 @@ function uploadpic() {
         return;
     }
     
-    
-    //---
-    
-    var input_im = document.getElementById("inp");
+    input_im = document.getElementById("inp");
     console.log(input_im.value);
-
-    //var image = document.getElementById("npuzzle"); 
-    /*var width = image.clientWidth;
-    console.log(width);
-    //image.src = input_im.value;
-    width = image.clientWidth;
-    console.log(width);*/
-    
-    //---
     
     image = new Image();
-    image.src = input_im.value;
+    image.src = 'img/' + input_im.value;
     image.onload = function(){
         // Resize the image and draw it at the origin
         canvas.width = image.width;

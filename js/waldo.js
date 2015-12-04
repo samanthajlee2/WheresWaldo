@@ -21,7 +21,7 @@ window.onload = function() {
         return;
     }
     image = new Image();
-    image.src = "puzzle.jpg";
+    image.src = "img/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
         canvas.width = image.width;
