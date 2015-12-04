@@ -31,18 +31,54 @@ window.onload = function() {
 
 }
 
-function ShowRed(img){  // function to call test shader to show red in image more clearly
-    filter.addFilter( 'hue', val );
-    modified_image = filter.apply(img);
-    ctx.drawImage(modified_image, 0, 0);
+function ShowRed(){  // function to call test shader to show red in image more clearly
+    //filter.addFilter( 'hue', val );
+    //modified_image = filter.apply(img);
+    //ctx.drawImage(modified_image, 0, 0);
+    imageData = ctx.getImageData(0,0,image.width, image.height);
+    var data = imageData.data;
+    //for (var i = 0; i < data.length; i += 4) {
+        for (var i = 0; i < data.length; i += 4) {
+        var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);  
+            if (hsl[0] < 340/360 && hsl[0] > 30/360){
+                // data[i+1] = 0;
+                // data[i+2] = 0;
+                // data[i] = 0;
+            } 
+            else {
+              data[i]     = 255;     // red
+              data[i + 1] = 0;
+              data[i + 2] = 0;
+            }
+    }
+    ctx.putImageData(imageData, 0, 0);
 }
 
 document.getElementById("image_canvas").addEventListener('click', function(event){
     console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
 })
 
+// Code ripped from stackoverflow
+function rgbToHsl(r, g, b){
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
 
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
 
+    return [h, s, l];
+}
 
 
 
