@@ -1,0 +1,21 @@
+#filter {
+    width: 200px;
+    float: left;
+    text-align: center;
+    background-color: grey;
+}
+
+#puzzle_css {
+    margin-left: 200px;
+    margin-top: 2px;
+    background-color: dimgray;
+}
+
+#upload_css {
+    margin-left: 200px;
+    background-color: ghostwhite;
+}
+
+html {
+    background-color: gray;
+}

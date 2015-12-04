@@ -19,9 +19,9 @@ window.onload = function() {
         ctx.fillRect(0,0,canvas.width, canvas.height);
         ctx.fillText("This browser doesn't have support for WegGL, or something else went wrong...\n"+error.message, canvas.width/2, canvas.height/2);
         return;
-    }   
+    }
     image = new Image();
-    image.src = "puzzle.jpg";
+    image.src = "img/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
         canvas.width = image.width;
