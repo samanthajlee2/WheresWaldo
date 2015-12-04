@@ -38,7 +38,7 @@ function ShowRed(img){  // function to call test shader to show red in image mor
 }
 
 document.getElementById("image_canvas").addEventListener('click', function(event){
-    console.log(event.pageX-document.getElementById("image_canvas"),event.pageY-document.getElementById("canvas"));
+    console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
 })
 
 
