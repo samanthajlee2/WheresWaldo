@@ -25,7 +25,7 @@
         ctx.drawImage(image, 0, 0);
     }
 }*/
-
+/*
 function onCheck(filter) {
     if (filter.checked){
         addFilter(filter.value);
@@ -51,7 +51,7 @@ function addFilter(filterName) {
 function removeFilter(filterName) {
     alert("REMOVE filter: " + filterName);
 }
-    
+    */
 /*function brightnessConstrast() {
     canvas.draw(texture).brightnessContrast(this.brightness, this.contrast).update();
 })*/
