@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="css/Waldo.css">
         <script type="text/javascript" src="js/Waldo2.js"></script>
         <script type="text/javascript" src="js/waldo.js"></script>
-        <script type="text/javascript" src="https://raw.githubusercontent.com/phoboslab/WebGLImageFilter/master/webgl-image-filter.js"></script>
+        <!--<script type="text/javascript" src="https://raw.githubusercontent.com/phoboslab/WebGLImageFilter/master/webgl-image-filter.js"></script>-->
 
         <title>
             Where's Waldo Assistant
@@ -20,13 +20,12 @@
         <div id="filter">
             <button class='resetbutton' id="Reset" value="Reset" onclick='reset()'>Reset</button><br>
             <hr class='divider'>
-            <button id="showRed" value="Show Red" onclick="ShowRed(image);">Click to Show Red!</button>
-            <input type="range" value=0 min=0 max=360 onchange="val = this.value;">Adjust Hue Filter Setting</input><br>
             
-              <label><input type='checkbox' value="ooone" onclick='onCheck(this);'>Filter One</label> <br>
-              <label><input type='checkbox' value="two" onclick='onCheck(this);'>Filter Two</label> <br>
-              <label><input type='checkbox' value="three" onclick='onCheck(this);'>Filter Three</label> <br>
-              <label><input type='checkbox' value="crop" onclick='onCheck(this);'>Mask Make Search Area Smaller</label> <br>
+              <label><input type='checkbox' value=0 onclick='toggle(this, 0);'>Show Red</label> <br>
+              <label><input type='checkbox' value=0 onclick='toggle(this, 1);'>Show Blue</label> <br>
+              <label><input type='checkbox' value=0 onclick='toggle(this, 2);'>Show Yellow</label> <br>
+
+            <label><input type='checkbox' value="crop" onclick='onCheck(this);'>Mask Make Search Area Smaller</label> <br>
         
         </div>
 
