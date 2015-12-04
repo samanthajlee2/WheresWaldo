@@ -5,6 +5,9 @@ var ctx;            // canvas context
 var canvas;
 var filter = null;
 val = 0;
+var safe_color = [0, 0, 0];
+var filters = [0, 0, 0]
+var tests = [testForRed, testForBlue, testForYellow];
 
 window.onload = function() {
 	canvas = document.getElementById("image_canvas");
@@ -28,25 +31,44 @@ window.onload = function() {
         canvas.height = image.height;
         ctx.drawImage(image, 0, 0);
     }
+    console.log("The image should show up now...");
 
 }
 
-function ShowRed(){  // function to call test shader to show red in image more clearly
-    //filter.addFilter( 'hue', val );
-    //modified_image = filter.apply(img);
-    //ctx.drawImage(modified_image, 0, 0);
-    imageData = ctx.getImageData(0,0,image.width, image.height);
+function toggle(thing, num){
+    thing.value = Math.abs(thing.value-1);
+    filters[num] = thing.value;
+    //filterAll();
+}
+
+function testForRed(col, hsl){
+    return (hsl[0] > 340/360 || hsl[0] < 20/360);
+}
+
+function testForBlue(col, hsl){
+    return (hsl[0] > 180/360 && hsl[0] < 280/360);
+}
+
+function testForYellow(col, hsl){
+    return(hsl[0] > 45/360 && hsl[0] < 110/360);
+}
+
+function filterAll(){
+    modified_image = image;
+    imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
     var data = imageData.data;
-    //for (var i = 0; i < data.length; i += 4) {
-        for (var i = 0; i < data.length; i += 4) {
-        var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);  
-            if (hsl[0] < 340/360 && hsl[0] > 30/360){
+    for (var i = 0; i < data.length; i += 4) {
+        var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
+        var rgb = [data[i], data[i+1], data[i+2]];
+        var test = true;
+        for (j = 0; j < filters.length; j ++) test | tests[j](rgb, hsl);
+            if (test){
                 // data[i+1] = 0;
                 // data[i+2] = 0;
                 // data[i] = 0;
             } 
             else {
-              data[i]     = 255;     // red
+              data[i]     = 0;     // red
               data[i + 1] = 0;
               data[i + 2] = 0;
             }
@@ -54,9 +76,9 @@ function ShowRed(){  // function to call test shader to show red in image more c
     ctx.putImageData(imageData, 0, 0);
 }
 
-document.getElementById("image_canvas").addEventListener('click', function(event){
-    console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
-})
+// document.getElementById("image_canvas").addEventListener('click', function(event){
+//     console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
+// })
 
 // Code ripped from stackoverflow
 function rgbToHsl(r, g, b){
@@ -79,95 +101,3 @@ function rgbToHsl(r, g, b){
 
     return [h, s, l];
 }
-
-
-
-
-// Below is the realm of abandoned code:
-
-/*
-filters.getPixels = function(img) {
-  return ctx.getImageData(0,0,c.width,c.height);
-};
-
-filters.filterImage = function(filter, img, var_args) {
-    var args = [this.getPixels(img)];
-    for (var i=2; i < arguments.length; i++){
-        args.push(arguments[i]);
-    }
-    return filter.apply(null, args);
-}
-
-filters.to_hsv = function(pixels, args) {
-    var data = pixels.data;
-    for (var i = 0; i < data.length; i+=4) {
-        var r = d[i];
-        var g = d[i+1];
-        var b = d[i+2];
-        hsv = rgb2hsv(r,g,b);
-        d[i] = hsv["h"];
-        d[i+1] = hsv["s"];
-        d[i+2] = hsv["v"];
-    }
-    return pixels;
-}
-
-document.getElementById("to_hsv").onclick = function(){
-    console.log("Converting to hsv!\n");
-    tmp = image;
-    filters.filterImage(filter.to_hsv, temp);
-
-}
-
-
-function renderImage(img){
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.drawImage(img, 0, 0);
-}
-
-
-// Thanks to Mic on stackoverflow for this function
-function rgb2hsv () {
-    var rr, gg, bb,
-        r = arguments[0] / 255,
-        g = arguments[1] / 255,
-        b = arguments[2] / 255,
-        h, s,
-        v = Math.max(r, g, b),
-        diff = v - Math.min(r, g, b),
-        diffc = function(c){
-            return (v - c) / 6 / diff + 1 / 2;
-        };
-
-    if (diff == 0) {
-        h = s = 0;
-    } else {
-        s = diff / v;
-        rr = diffc(r);
-        gg = diffc(g);
-        bb = diffc(b);
-
-        if (r === v) {
-            h = bb - gg;
-        }else if (g === v) {
-            h = (1 / 3) + rr - bb;
-        }else if (b === v) {
-            h = (2 / 3) + gg - rr;
-        }
-        if (h < 0) {
-            h += 1;
-        }else if (h > 1) {
-            h -= 1;
-        }
-    }
-    return {
-        h: Math.round(h * 360),
-        s: Math.round(s * 100),
-        v: Math.round(v * 100)
-    };
-}
-
-*/
-
-
