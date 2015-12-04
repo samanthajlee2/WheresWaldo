@@ -7,7 +7,11 @@ var filter = null;
 var val = 0;
 var safe_color = [0, 0, 0];
 var filters = [0, 0, 0]
-var tests = [testForRed, testForBlue, testForYellow];
+var tests = [
+    testForRed,
+    testForBlue, 
+    testForYellow
+    ];
 
 window.onload = function() {
 	canvas = document.getElementById("image_canvas");
@@ -45,7 +49,7 @@ function uploadpic() {
 function toggle(thing, num){
     thing.value = Math.abs(thing.value-1);
     filters[num] = thing.value;
-    //filterAll();
+    filterAll();
 }
 
 function testForRed(col, hsl){
@@ -61,6 +65,7 @@ function testForYellow(col, hsl){
 }
 
 function filterAll(){
+    console.log("Running filters!");
     modified_image = image;
     imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
 
@@ -68,17 +73,20 @@ function filterAll(){
     for (var i = 0; i < data.length; i += 4) {
         var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
         var rgb = [data[i], data[i+1], data[i+2]];
-        var test = true;
-        for (j = 0; j < filters.length; j ++) test | tests[j](rgb, hsl);
+        var test = false;
+        for (j = 0; j < filters.length; j ++) {
+            if (filters[j])
+                test = test || tests[j](rgb, hsl);
+        }
             if (test){
-                // data[i+1] = 0;
-                // data[i+2] = 0;
-                // data[i] = 0;
+                //data[i] = 0;
+                //data[i+1] = 0;
+                //data[i+2] = 0;
             } 
             else {
-              data[i]     = 0;     // red
-              data[i + 1] = 0;
-              data[i + 2] = 0;
+              data[i]     = 255;     // red
+              data[i + 1] = 255;
+              data[i + 2] = 255;
             }
     }
     ctx.putImageData(imageData, 0, 0);
