@@ -1,10 +1,10 @@
-var image;          // The image that the user interacts with
+var image = null;          // The image that the user interacts with
 var modified_image = null;
 //var filters = {};   // The filters that the user has applied
 var ctx;            // canvas context
 var canvas;
 var filter = null;
-val = 0;
+var val = 0;
 var safe_color = [0, 0, 0];
 var filters = [0, 0, 0]
 var tests = [testForRed, testForBlue, testForYellow];
@@ -12,17 +12,11 @@ var tests = [testForRed, testForBlue, testForYellow];
 window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
+    canvas.addEventListener('click', function(event){
+        console.log(event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop);
+    });
     //console.log(image.height);
     //console.log(image.width);
-    try {
-        filter = new WebGLImageFilter();
-    }
-    catch( error ) {
-        ctx.fillStyle = '#FFF';
-        ctx.fillRect(0,0,canvas.width, canvas.height);
-        ctx.fillText("This browser doesn't have support for WegGL, or something else went wrong...\n"+error.message, canvas.width/2, canvas.height/2);
-        return;
-    }
     image = new Image();
     image.src = "img/puzzle.jpg";
     image.onload = function(){
@@ -90,11 +84,6 @@ function filterAll(){
     ctx.putImageData(imageData, 0, 0);
 }
 
-
-
-document.getElementById("image_canvas").addEventListener('click', function(event){
-    console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
-})
 
 // Code ripped from stackoverflow
 function rgbToHsl(r, g, b){
