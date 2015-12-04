@@ -31,6 +31,19 @@ window.onload = function() {
 
 }
 
+function uploadpic() {
+    input_im = document.getElementById("inp");
+    console.log(input_im.value);
+    
+    image.src = 'img/' + input_im.value;
+    image.onload = function(){
+        // Resize the image and draw it at the origin
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+    }
+}
+
 function ShowRed(){  // function to call test shader to show red in image more clearly
     //filter.addFilter( 'hue', val );
     //modified_image = filter.apply(img);
@@ -53,6 +66,7 @@ function ShowRed(){  // function to call test shader to show red in image more c
     }
     ctx.putImageData(imageData, 0, 0);
 }
+
 
 document.getElementById("image_canvas").addEventListener('click', function(event){
     console.log(event.pageX-this.offsetLeft,event.pageY-this.offsetTop);
@@ -80,7 +94,35 @@ function rgbToHsl(r, g, b){
     return [h, s, l];
 }
 
+function reset() {
+    ctx.drawImage(image, 0, 0);
+}
 
+
+function onCheck(filter) {
+    if (filter.checked){
+        addFilter(filter.value);
+    } else {
+        removeFilter(filter.value);
+    }
+}
+
+function crop() {
+    alert("this is the crop function, will make greyed out boxes...");
+}
+
+function addFilter(filterName) {
+    if (filterName == "crop") {
+        crop();
+    } else {
+        alert("ADD filter: " + filterName);
+    }
+}
+
+
+function removeFilter(filterName) {
+    alert("REMOVE filter: " + filterName);
+}
 
 
 // Below is the realm of abandoned code:

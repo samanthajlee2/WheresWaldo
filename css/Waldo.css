@@ -5,6 +5,10 @@
     background-color: grey;
 }
 
+.resetbutton{
+    margin-bottom: 2px;
+}
+
 #puzzle_css {
     margin-left: 200px;
     margin-top: 2px;
@@ -18,4 +22,15 @@
 
 html {
     background-color: gray;
+}
+
+h3 {
+    background-color: dimgray;
+    align-content: center;
+    padding-left: 5px;
+}
+
+.divider {
+    margin-right: 10px;
+    margin-left: 5px;
 }

@@ -1,6 +1,6 @@
 
 
-function uploadpic() {
+/*function uploadpic() {
     var canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     try {
@@ -24,7 +24,7 @@ function uploadpic() {
         canvas.height = image.height;
         ctx.drawImage(image, 0, 0);
     }
-}
+}*/
 
 function onCheck(filter) {
     if (filter.checked){
@@ -56,13 +56,8 @@ function removeFilter(filterName) {
     canvas.draw(texture).brightnessContrast(this.brightness, this.contrast).update();
 })*/
 
-
-function main() {
-    // Read the KML file
-        
-    // Setup the Babylon system
-    var canvas = document.getElementById("CropCanvas");
+/*function main() {
     
-}
+}*/
 
 

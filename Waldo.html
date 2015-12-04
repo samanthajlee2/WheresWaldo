@@ -16,7 +16,10 @@
     <body>
         <h3>Where's Waldo Assistant</h3>
         
+        
         <div id="filter">
+            <button class='resetbutton' id="Reset" value="Reset" onclick='reset()'>Reset</button><br>
+            <hr class='divider'>
             <button id="showRed" value="Show Red" onclick="ShowRed(image);">Click to Show Red!</button>
             <input type="range" value=0 min=0 max=360 onchange="val = this.value;">Adjust Hue Filter Setting</input><br>
             
@@ -28,12 +31,13 @@
         </div>
 
         <div id="upload_css">
-            <input id="inp" type='file' />
-            <input type='button' value = "submit" onclick='uploadpic()'></input>
+            <input id="inp" type='file' value="puzzle.jpg"/>
+            <input type='button' value = "submit" onclick='uploadpic();'></input>
         </div>
     
         <div id="puzzle_css">
-            <canvas id="image_canvas" width=1000 height=1000></canvas>
+            <!--<canvas id="image_canvas" width=1000 height=1000></canvas>-->
+            <canvas id="image_canvas"></canvas>
         </div>
 
     </body>
