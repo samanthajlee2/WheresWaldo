@@ -129,7 +129,18 @@ function onCheck(filter) {
 }
 
 function crop() {
-    alert("this is the crop function, will make greyed out boxes...");
+    modified_image = image;
+    imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
+    //copy pasta from alex's masking.js
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = 255;     // red
+        data[i + 1] = 255; // green
+        data[i + 2] = 255; // blue
+    }
+    ctx.putImageData(imageData, 150, 150, 0, 0, 200, 200);
+    ctx.putImageData(imageData, 0, 0, 0, 0, 150, 150);
 }
 
 function addFilter(filterName) {
