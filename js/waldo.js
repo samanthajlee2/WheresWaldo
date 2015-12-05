@@ -153,6 +153,20 @@ function oppositeCrop(top,bottom){
     ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
 }
 
+function ungray(top,bottom){
+    modified_image = image;
+    var imageData = ctx.getImageData(top[0],top[1],bottom[0],bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);  
+}
+
 //----------------------------------------------------------------
 //  FILTER FUNCTIONS
 //----------------------------------------------------------------
