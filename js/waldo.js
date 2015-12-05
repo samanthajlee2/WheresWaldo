@@ -89,13 +89,13 @@ gray = function(event){
         }
     }
 
-function grayout() {
+function grayOut() {
         count = 0;
     document.getElementById("cursor").setAttribute("class", "crosshair");
         canvas.addEventListener('click', gray);
 }
 
-function notgrayout() {
+function notGrayOut() {
         count = 0;
     document.getElementById("cursor").setAttribute("class", "crosshair");
     canvas.addEventListener('click', notgray);    
