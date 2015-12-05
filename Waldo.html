@@ -18,10 +18,21 @@
         <div id="filter">
             <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
             <hr class='divider'>
-            
-              <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label> <br>
-              <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>
-              <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 2);'>Show Yellow</label> <br>
+            <div id="redblock">
+                <label>
+                <input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label><br>
+                Hue Range
+                <input type="range" value=0 >
+            </div><br>
+            <div id="blueblock">
+                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>Hue Range
+                <input type="range" value=0 >
+            </div>
+            <div>
+                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 2);'>Show Yellow</label> <br>
+                Hue Range
+                <input type="range" value=0 >
+            </div>
 
             <label><input class="checkboxes" type='checkbox' value="crop" onclick='crop(this);'>Mask Make Search Area Smaller</label> <br>
             
