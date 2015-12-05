@@ -128,19 +128,38 @@ function onCheck(filter) {
     }
 }
 
-function crop() {
+function crop(top,bottom) {
     modified_image = image;
     imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
     //copy pasta from alex's masking.js
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = 255;     // red
-        data[i + 1] = 255; // green
-        data[i + 2] = 255; // blue
+        data[i]     = data[i]-105;     // red
+        data[i + 1] = data[i+1]-105; // green
+        data[i + 2] = data[i+2]-105; // blue
     }
-    ctx.putImageData(imageData, 150, 150, 0, 0, 200, 200);
-    ctx.putImageData(imageData, 0, 0, 0, 0, 150, 150);
+    ctx.putImageData(imageData, 0, 0, 0, 0, top[0], modified_image.height);
+    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, top[1]);
+    var imageData = ctx.getImageData(top[0],bottom[1],modified_image.width,modified_image.height);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i] - 105;     // red
+        data[i + 1] = data[i+1] - 105; // green
+        data[i + 2] = data[i+2] - 105; // blue
+    }
+    ctx.putImageData(imageData, top[0],bottom[1], 0, 0, modified_image.width, modified_image.height);
+    
+            var imageData = ctx.getImageData(bottom[0],top[1],modified_image.width,bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i] - 105;     // red
+        data[i + 1] = data[i+1] - 105; // green
+        data[i + 2] = data[i+2] - 105; // blue
+    }
+    ctx.putImageData(imageData, bottom[0], top[1], 0, 0, modified_image.width, bottom[1]-top[1]);
 }
 
 function addFilter(filterName) {
