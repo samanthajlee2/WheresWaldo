@@ -15,9 +15,8 @@
     <body>
         <h3>Where's Waldo Assistant</h3>
         
-        
         <div id="filter">
-            <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset</button><br>
+            <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
             <hr class='divider'>
             
               <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label> <br>
@@ -40,7 +39,11 @@
     
         <div id="puzzle_css">
             <!--<canvas id="image_canvas" width=1000 height=1000></canvas>-->
+            
+        <span id="cursor">
             <canvas id="image_canvas"></canvas>
+        </span>
+            
         </div>
 
     </body>

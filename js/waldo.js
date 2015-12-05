@@ -56,6 +56,7 @@ notgray = function(event){
             crop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click', notgray);
+            document.getElementById("cursor").setAttribute("class", "");
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -72,6 +73,7 @@ gray = function(event){
             oppositeCrop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click',gray);
+            document.getElementById("cursor").setAttribute("class", "");
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -82,12 +84,13 @@ gray = function(event){
 
 function grayout() {
         count = 0;
+    document.getElementById("cursor").setAttribute("class", "crosshair");
         canvas.addEventListener('click', gray);
-    
 }
 
 function notgrayout() {
         count = 0;
+    document.getElementById("cursor").setAttribute("class", "crosshair");
     canvas.addEventListener('click', notgray);    
 }
 
