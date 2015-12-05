@@ -1,6 +1,7 @@
 var count = 0;
-var top;
-var bottom;
+var topx;       //for clicking function
+var topy;       //for clicking function
+var bottom;     //for clicking function
 var image = null;          // The image that the user interacts with
 var modified_image = null;
 var ctx;            // canvas context
@@ -20,14 +21,17 @@ window.onload = function() {
 	ctx = canvas.getContext('2d');
     canvas.addEventListener('click', function(event){
         count++
-  	if(count == 2){
-    		bottom = [event.pageX-cavas.offsetLeft,event.pageY-canvas.offsetTop];
-    		canvas(top,bottom);
-    		count = 0
-  	}
-  	else{
-    		top = [event.pageX-cavas.offsetLeft,event.pageY-canvas.offsetTop];
-  	}
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            crop([topx, topy],bottom);
+            count = 0
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+        }
     });
     //console.log(image.height);
     //console.log(image.width);
