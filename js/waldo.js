@@ -39,6 +39,7 @@ window.onload = function() {
     image.src = "img/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
+        ctx.scale(0.1, 0.1)
         canvas.width = image.width;
         canvas.height = image.height;
         reset();
@@ -117,7 +118,7 @@ function filterAll(){
 }
 
 
-// Code ripped from stackoverflow
+// hsl converter from stackoverflow:
 function rgbToHsl(r, g, b){
     r /= 255, g /= 255, b /= 255;
     var max = Math.max(r, g, b), min = Math.min(r, g, b);
