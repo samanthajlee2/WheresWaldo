@@ -47,35 +47,14 @@ window.onload = function() {
 
 }
 
-function grayout() {
-        canvas.removeEventListener('click',notgrayout);
-        grayout = function(event){
-        count++
-        if(count%2 == 0){
-            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
-            console.log(bottom);
-            oppositeCrop([topx, topy],bottom);
-            count = 0
-        }
-        else{
-            topx = event.pageX-canvas.offsetLeft;
-            topy = event.pageY-canvas.offsetTop;
-            console.log(topx, topy);
-        }
-    }
-        canvas.addEventListener('click', grayout);
-    
-}
-
-function notgrayout() {
-        canvas.removeEventListener('click',grayout);
-        notgrayout = function(event){
+notgray = function(event){
         count++
         if(count%2 == 0){
             bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
             console.log(bottom);
             crop([topx, topy],bottom);
             count = 0
+            canvas.removeEventListener('click', notgray);
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -83,8 +62,32 @@ function notgrayout() {
             console.log(topx, topy);
         }
     }
-        canvas.addEventListener('click', notgrayout);
+
+gray = function(event){
+        count++
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            oppositeCrop([topx, topy],bottom);
+            count = 0
+            canvas.removeEventListener('click',gray);
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+        }
+    }
+
+function grayout() {
+        count = 0;
+        canvas.addEventListener('click', gray);
     
+}
+
+function notgrayout() {
+        count = 0;
+    canvas.addEventListener('click', notgray);    
 }
 
 function uploadpic() {
