@@ -301,3 +301,7 @@ function reset() {
         filter_ranges[i][0] = false;
     }
 }
+
+function resetColor() {
+    console.log("mark or someone... please write this function.");
+}
