@@ -62,11 +62,10 @@ notgray = function(event){
         if(count%2 == 0){
             bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
             console.log(bottom);
+            document.getElementById("cursor").setAttribute("class", "");
             crop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click', notgray);
-            canvas.removeEventListener('click', rgray);
-            document.getElementById("cursor").setAttribute("class", "");
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -80,11 +79,12 @@ gray = function(event){
         if(count%2 == 0){
             bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
             console.log(bottom);
+            document.getElementById("grayOut").innerHTML = "Gray Out Area";
+            document.getElementById("cursor").setAttribute("class", "");
             oppositeCrop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click',gray);
             canvas.removeEventListener('click',rgray);
-            document.getElementById("cursor").setAttribute("class", "");
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -98,10 +98,10 @@ rgray = function(event){
         if(count%2 == 0){
             bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
             console.log(bottom);
+            document.getElementById("removeGray").innerHTML = "Remove Gray"; document.getElementById("cursor").setAttribute("class", "");
             ungray([topx, topy],bottom);
             count = 0
-            canvas.removeEventListener('click',gray);
-            canvas.removeEventListener('click',notgray);
+            canvas.removeEventListener('click',rgray);
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -110,19 +110,54 @@ rgray = function(event){
         }
 }
 
+function cancelFunction(strOriginal, button, cursor, functionToCancel) {
+    button.innerHTML = strOriginal;
+    canvas.removeEventListener('click', functionToCancel);
+}
+
 function removeGray(){
-        count = 0;
+    
+    count = 0;
+    var button = document.getElementById("removeGray");
+    var cursor = document.getElementById("cursor");
+    var strCancel = "Click here to cancel";
+    var strOriginal = "Remove Gray";
+    
+    cancelFunction("Gray Out Area", document.getElementById("grayOut"), cursor, gray);
+    
+    if(button.innerHTML == strCancel){
+        cursor.setAttribute("class", "");
+        cancelFunction(strOriginal, button, cursor, rgray);
+        
+    } else {
+        button.innerHTML = strCancel;
+        cursor.setAttribute("class", "crosshair");
         canvas.addEventListener('click', rgray);
+    }
 }
 
 function grayOut() {
-        count = 0;
-    document.getElementById("cursor").setAttribute("class", "crosshair");
+    count = 0;
+    var button = document.getElementById("grayOut");
+    var cursor = document.getElementById("cursor");
+    var strCancel = "Click here to cancel";
+    var strOriginal = "Gray Out Area";
+    
+    cancelFunction("Remove Gray", document.getElementById("removeGray"), cursor, rgray);
+    
+    if(button.innerHTML == strCancel){
+        cursor.setAttribute("class", "");
+        cancelFunction(strOriginal, button, cursor, gray);
+        
+    } else {
+        button.innerHTML = strCancel;
+        cursor.setAttribute("class", "crosshair");
         canvas.addEventListener('click', gray);
+    }
 }
 
 function notGrayOut() {
-        count = 0;
+    count = 0;
     document.getElementById("cursor").setAttribute("class", "crosshair");
     canvas.addEventListener('click', notgray);    
 }
@@ -205,7 +240,6 @@ function allGray(){
     }
     ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
 }
-    
 
 //----------------------------------------------------------------
 //  FILTER FUNCTIONS
@@ -231,19 +265,20 @@ function filterTest(col, hsl, i){
 function filterAll(){
     console.log("Running filters!");
     var no_filter_check = true;
+    var backup_data = ctx.getImageData(0,0,image.width, image.height);
     ctx.drawImage(image, 0, 0);
     for (i = 0; i < filter_ranges.length; i ++){
         if (filter_ranges[i][0]){
             no_filter_check = false;
             break;
         }
-    } 
-    if (!no_filter_check){
-        modified_image = image;
-        imageData = ctx.getImageData(0,0,image.width, image.height);
+    }
+    modified_image = image;
+    imageData = ctx.getImageData(0,0,image.width, image.height);
 
-        var data = imageData.data;
-        for (var i = 0; i < data.length; i += 4) {
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        if (!no_filter_check) {
             var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
             var rgb = [data[i], data[i+1], data[i+2]];
             var test = false;
@@ -251,19 +286,15 @@ function filterAll(){
                 if (filter_ranges[j][0])
                     test = test || filterTest(rgb, hsl, j); 
             }
-                if (test){
-                    //data[i] = 0;
-                    //data[i+1] = 0;
-                    //data[i+2] = 0;
-                } 
-                else {
-                  data[i]     = safe_color[0];     // red
-                  data[i + 1] = safe_color[1];
-                  data[i + 2] = safe_color[2];
-                }
+            if (!test){
+              data[i]     = safe_color[0];     // red
+              data[i + 1] = safe_color[1];
+              data[i + 2] = safe_color[2];
+            }
         }
-        ctx.putImageData(imageData, 0, 0);
+        data[i +3] = backup_data.data[i+3];
     }
+    ctx.putImageData(imageData, 0, 0);
 }
 
 
@@ -318,8 +349,7 @@ function rgbToHsl(r, g, b){
 //  RESET FUNCTIONS
 //----------------------------------------------------------------
 
-function reset() {
-    ctx.drawImage(image, 0, 0);
+function resetFilters() {
     var elems = document.getElementsByClassName("checkboxes")
     for (i = 0; i < elems.length; i ++){
         elems[i].checked = false;
@@ -327,4 +357,27 @@ function reset() {
     for (i = 0; i < filter_ranges.length; i ++){
         filter_ranges[i][0] = false;
     }
+}
+
+function reset() {
+    ctx.drawImage(image, 0, 0);
+    resetFilters();
+}
+
+function resetColor() {
+    resetFilters();
+    filterAll();
+}
+
+function resetGray(){
+    modified_image = image;
+    var imageData = ctx.getImageData(0,0,modified_image.width,modified_image.height);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i] = data[i];
+        data[i + 1] = data[i+1];
+        data[i + 2] = data[i+2];
+        data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
 }
