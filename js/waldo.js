@@ -165,10 +165,10 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = 255;     // red
-        data[i + 1] = 255; // green
-        data[i + 2] = 255; // blue
-        data[i + 3] = 150;
+        data[i]     = data[i] - 125;     // red
+        data[i + 1] = data[i+1] - 125; // green
+        data[i + 2] = data[i+2] - 125; // blue
+        data[i + 3] = 200;
     }
     ctx.putImageData(imageData, 0, 0, 0, 0, top[0], modified_image.height);
     ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, top[1]);
@@ -176,10 +176,10 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = 255;     // red
-        data[i + 1] = 255; // green
-        data[i + 2] = 255; // blue
-        data[i + 3] = 150;
+        data[i]     = data[i] - 125;     // red
+        data[i + 1] = data[i+1] - 125; // green
+        data[i + 2] = data[i+2] - 125; // blue
+        data[i + 3] = 200;
     }
     ctx.putImageData(imageData, top[0],bottom[1], 0, 0, modified_image.width, modified_image.height);
     
@@ -187,12 +187,26 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = 255;     // red
-        data[i + 1] = 255; // green
-        data[i + 2] = 255; // blue
-        data[i + 3] = 150;
+        data[i]     = data[i] - 125;     // red
+        data[i + 1] = data[i+1] - 125; // green
+        data[i + 2] = data[i+2] - 125; // blue
+        data[i + 3] = 200;
     }
     ctx.putImageData(imageData, bottom[0], top[1], 0, 0, modified_image.width, bottom[1]-top[1]);
+}
+
+function oppositeCrop(top,bottom){
+    modified_image = image;
+    var imageData = ctx.getImageData(top[0],top[1],bottom[0],bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i] - 125;     // red
+        data[i + 1] = data[i+1] - 125; // green
+        data[i + 2] = data[i+2] - 125; // blue
+        data[i + 3] = 200;
+    }
+    ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
 }
 
 function addFilter(filterName) {
