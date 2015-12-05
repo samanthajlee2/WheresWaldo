@@ -106,6 +106,7 @@ rgray = function(event){
             topx = event.pageX-canvas.offsetLeft;
             topy = event.pageY-canvas.offsetTop;
             console.log(topx, topy);
+        }
 }
 
 function removeGray(){
