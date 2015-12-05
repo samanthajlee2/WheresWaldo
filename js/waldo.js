@@ -205,20 +205,6 @@ function allGray(){
     ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
 }
 
-function resetGray(){
-    modified_image = image;
-    var imageData = ctx.getImageData(0,0,modified_image.width,modified_image.height);
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        data[i] = data[i];
-        data[i + 1] = data[i+1];
-        data[i + 2] = data[i+2];
-        data[i + 3] = 255;
-    }
-    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
-}
-    
-
 //----------------------------------------------------------------
 //  FILTER FUNCTIONS
 //----------------------------------------------------------------
@@ -313,4 +299,17 @@ function reset() {
     for (i = 0; i < filter_ranges.length; i ++){
         filter_ranges[i][0] = false;
     }
+}
+
+function resetGray(){
+    modified_image = image;
+    var imageData = ctx.getImageData(0,0,modified_image.width,modified_image.height);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i] = data[i];
+        data[i + 1] = data[i+1];
+        data[i + 2] = data[i+2];
+        data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
 }
