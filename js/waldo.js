@@ -63,6 +63,7 @@ notgray = function(event){
             crop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click', notgray);
+            canvas.removeEventListener('click', rgray);
             document.getElementById("cursor").setAttribute("class", "");
         }
         else{
@@ -80,6 +81,7 @@ gray = function(event){
             oppositeCrop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click',gray);
+            canvas.removeEventListener('click',rgray);
             document.getElementById("cursor").setAttribute("class", "");
         }
         else{
@@ -88,6 +90,27 @@ gray = function(event){
             console.log(topx, topy);
         }
     }
+    
+rgray = function(event){
+        count++
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            ungray([topx, topy],bottom);
+            count = 0
+            canvas.removeEventListener('click',gray);
+            canvas.removeEventListener('click',notgray);
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+}
+
+function removeGray(){
+        count = 0;
+        canvas.addEventListener('click', rgray);
+}
 
 function grayOut() {
         count = 0;
