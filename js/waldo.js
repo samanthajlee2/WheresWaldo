@@ -1,3 +1,6 @@
+var count = 0;
+var top;
+var bottom;
 var image = null;          // The image that the user interacts with
 var modified_image = null;
 var ctx;            // canvas context
@@ -16,7 +19,15 @@ window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     canvas.addEventListener('click', function(event){
-        console.log(event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop);
+        count++
+  	if(count == 2){
+    		bottom = [event.pageX-cavas.offsetLeft,event.pageY-canvas.offsetTop];
+    		canvas(top,bottom);
+    		count = 0
+  	}
+  	else{
+    		top = [event.pageX-cavas.offsetLeft,event.pageY-canvas.offsetTop];
+  	}
     });
     //console.log(image.height);
     //console.log(image.width);
