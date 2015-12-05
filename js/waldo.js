@@ -184,7 +184,7 @@ function rgbToHsl(r, g, b){
 
 function reset() {
     ctx.drawImage(image, 0, 0);
-    var elems = document.getElementsByClassName("filters")
+    var elems = document.getElementsByClassName("checkboxes")
     for (i = 0; i < elems.length; i ++){
         elems[i].checked = false;
     }
