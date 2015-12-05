@@ -1,31 +1,30 @@
 #filter {
     width: 200px;
     float: left;
-    text-align: center;
-    background-color: grey;
 }
 
 .resetbutton{
+    background-color: lightgray;
     margin-bottom: 2px;
+    margin-left: 10px;
+    width: 175px;
 }
 
 #puzzle_css {
     margin-left: 200px;
-    margin-top: 2px;
-    background-color: dimgray;
+    margin-top: 5px;
 }
 
 #upload_css {
     margin-left: 200px;
-    background-color: ghostwhite;
 }
 
 html {
-    background-color: gray;
+    background-color: #1f1f1f;
+    color: white;
 }
 
 h3 {
-    background-color: dimgray;
     align-content: center;
     padding-left: 5px;
 }
