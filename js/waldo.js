@@ -16,12 +16,13 @@ var filter_ranges = [
     [false, 180, 280, true],
     [false, 45, 110, true],
     ];
-
+var slider_hsv = null;
 
 //----------------------------------------------------------------
 //  INITIALIZATION
 //----------------------------------------------------------------
 window.onload = function() {
+    initColorPicker();
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     image = new Image();
@@ -215,8 +216,10 @@ function updateCheckbox(thing, num){
     filterAll();
 }
 
-function updateFilterRange(thing, num){
-    //filter_ranges_
+// Update nth filter's mth value (upper or lower range) with the value
+// of the color picker
+function updateFilterRange(picker, n, m){
+    console.log(picker.toString());
 }
 
 function filterTest(col, hsl, i){
@@ -261,6 +264,30 @@ function filterAll(){
         }
         ctx.putImageData(imageData, 0, 0);
     }
+}
+
+
+function initColorPicker(){
+    ColorPicker.fixIndicators(
+                document.getElementById('slider-indicator'),
+                document.getElementById('picker-indicator')
+                );
+
+        ColorPicker(
+                document.getElementById('slider'), 
+                document.getElementById('picker'), 
+
+                function(hex, hsv, rgb, pickerCoordinate, sliderCoordinate) {
+
+                    ColorPicker.positionIndicators(
+                        document.getElementById('slider-indicator'),
+                        document.getElementById('picker-indicator'),
+                        sliderCoordinate, pickerCoordinate
+                    );
+
+                    slider_hsv = hsv;
+                    console.log(slider_hsv);
+            });
 }
 
 

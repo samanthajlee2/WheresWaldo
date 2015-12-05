@@ -6,6 +6,35 @@
         <link rel="shortcut icon" href="/waldoheadcon.ico" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/Waldo.css">
         <script type="text/javascript" src="js/waldo.js"></script>
+        <script type="text/javascript" src="js/colorpicker.js"></script>
+        <style type="text/css">
+
+            .picker-wrapper {
+                width: 0px;
+                height: 0px;
+                position: relative;
+                display: none;
+            }
+            .slider-wrapper {
+                width: 10px;
+                height: 50px;
+                position: relative;
+            }
+            .picker-indicator {
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                border: 1px solid white;
+                display: none;
+            }
+            .slider-indicator {
+                width: 100%;
+                height: 10px;
+                position: absolute;
+                border: 1px solid black;
+                background-color: gray;
+            }
+        </style>
         <!--<script type="text/javascript" src="https://raw.githubusercontent.com/phoboslab/WebGLImageFilter/master/webgl-image-filter.js"></script>-->
 
         <title>
@@ -23,17 +52,43 @@
             <div id="redblock">
                 <label>
                 <input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label><br>
-                Hue Range
-                <input type="range" value=0 >
+                Hue Range: <br>
+                <button>Select Lower Hue</button>
+                <button>Select Upper Hue</button>
             </div><br>
             <div id="blueblock">
-                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>Hue Range
-                <input type="range" value=0 >
+                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>
+                Hue Range: <br>
+                <button>Select Lower Hue</button>
+                <button>Select Upper Hue</button>
             </div>
             <div>
                 <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 2);'>Show Yellow</label> <br>
-                Hue Range
-                <input type="range" value=0 >
+                Hue Range: <br>
+                <button>Select Lower Hue</button>
+                <button>Select Upper Hue</button>
+            </div>
+            <div class="picker-wrapper">
+                <div id="picker"></div>
+                <div id="picker-indicator"></div>
+            </div>
+            <div id="slider-wrapper">
+                <div id="slider"></div>
+                <div id="slider-indicator"></div>
+            </div>
+
+            <div id="upload_css">
+                <input id="inp" type='file' value="puzzle.jpg"/>
+                <input type='button' value = "submit" onclick='uploadpic();'></input>
+            </div>
+        
+            <div id="puzzle_css">
+                <!--<canvas id="image_canvas" width=1000 height=1000></canvas>-->
+                
+            <span id="cursor">
+                <canvas id="image_canvas"></canvas>
+            </span>
+                
             </div>
 
             <label><input class="checkboxes" type='checkbox' value="crop" onclick='crop(this);'>Mask Make Search Area Smaller</label> <br>
@@ -47,36 +102,5 @@
             <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
         
         </div>
-
-        <div id="upload_css">
-            <input id="inp" type='file' value="puzzle.jpg"/>
-            <input type='button' value = "submit" onclick='uploadpic();'></input>
-        </div>
-    
-        <div id="puzzle_css">
-            <!--<canvas id="image_canvas" width=1000 height=1000></canvas>-->
-            
-        <span id="cursor">
-            <canvas id="image_canvas"></canvas>
-        </span>
-            
-        </div>
-
     </body>
 </html>
-
-
-
-
-<!--<script>
-var image = document.getElementById("puzzle"); 
-var width = image.clientWidth;
-var height = image.clientHeight;
-</script>-->
-
-
-<!-- <map name="planetmap">
-  <area shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm">
-  <area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm">
-  <area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm">
-</map> -->
