@@ -33,3 +33,7 @@ h3 {
     margin-right: 10px;
     margin-left: 5px;
 }
+
+.crosshair {
+    cursor: crosshair;
+}
