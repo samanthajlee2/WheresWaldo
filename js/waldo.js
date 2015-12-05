@@ -19,7 +19,7 @@ var tests = [
 window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
-    canvas.addEventListener('click', function(event){
+        /*canvas.addEventListener('click', function(event){
         count++
         if(count%2 == 0){
             bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
@@ -32,7 +32,7 @@ window.onload = function() {
             topy = event.pageY-canvas.offsetTop;
             console.log(topx, topy);
         }
-    });
+    });*/
     //console.log(image.height);
     //console.log(image.width);
     image = new Image();
@@ -46,6 +46,49 @@ window.onload = function() {
     }
     console.log("The image should show up now...");
 
+}
+
+notgray = function(event){
+        count++
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            crop([topx, topy],bottom);
+            count = 0
+            canvas.removeEventListener('click', notgray);
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+        }
+    }
+
+gray = function(event){
+        count++
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            oppositeCrop([topx, topy],bottom);
+            count = 0
+            canvas.removeEventListener('click',gray);
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+        }
+    }
+
+function grayout() {
+        count = 0;
+        canvas.addEventListener('click', gray);
+    
+}
+
+function notgrayout() {
+        count = 0;
+    canvas.addEventListener('click', notgray);    
 }
 
 function uploadpic() {
@@ -105,7 +148,6 @@ function filterAll(){
                     //data[i] = 0;
                     //data[i+1] = 0;
                     //data[i+2] = 0;
-                    //data[i+3] = 255;
                 } 
                 else {
                   data[i]     = 255;     // red
@@ -142,14 +184,21 @@ function rgbToHsl(r, g, b){
 
 function reset() {
     ctx.drawImage(image, 0, 0);
-    var elems = document.getElementsByClassName("checkboxes")
+    var elems = document.getElementsByClassName("filters")
     for (i = 0; i < elems.length; i ++){
-        //if (elems[i].checked) 
         elems[i].checked = false;
-        //elems[i].click();
     }
     for (i = 0; i < filters.length; i ++){
         filters[i] = false;
+    }
+}
+
+
+function onCheck(filter) {
+    if (filter.checked){
+        addFilter(filter.value);
+    } else {
+        removeFilter(filter.value);
     }
 }
 
@@ -160,10 +209,10 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i] - 125;     // red
-        data[i + 1] = data[i+1] - 125; // green
-        data[i + 2] = data[i+2] - 125; // blue
-        data[i + 3] = 200;
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
     }
     ctx.putImageData(imageData, 0, 0, 0, 0, top[0], modified_image.height);
     ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, top[1]);
@@ -171,10 +220,10 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i] - 125;     // red
-        data[i + 1] = data[i+1] - 125; // green
-        data[i + 2] = data[i+2] - 125; // blue
-        data[i + 3] = 200;
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
     }
     ctx.putImageData(imageData, top[0],bottom[1], 0, 0, modified_image.width, modified_image.height);
     
@@ -182,10 +231,10 @@ function crop(top,bottom) {
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i] - 125;     // red
-        data[i + 1] = data[i+1] - 125; // green
-        data[i + 2] = data[i+2] - 125; // blue
-        data[i + 3] = 200;
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
     }
     ctx.putImageData(imageData, bottom[0], top[1], 0, 0, modified_image.width, bottom[1]-top[1]);
 }
@@ -196,10 +245,10 @@ function oppositeCrop(top,bottom){
     console.log(imageData);
     var data = imageData.data;
     for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i] - 125;     // red
-        data[i + 1] = data[i+1] - 125; // green
-        data[i + 2] = data[i+2] - 125; // blue
-        data[i + 3] = 200;
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
     }
     ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
 }
