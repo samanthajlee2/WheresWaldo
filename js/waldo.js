@@ -64,6 +64,7 @@ notgray = function(event){
             crop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click', notgray);
+            canvas.removeEventListener('click', rgray);
             document.getElementById("cursor").setAttribute("class", "");
         }
         else{
@@ -81,6 +82,7 @@ gray = function(event){
             oppositeCrop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click',gray);
+            canvas.removeEventListener('click',rgray);
             document.getElementById("cursor").setAttribute("class", "");
         }
         else{
@@ -89,14 +91,35 @@ gray = function(event){
             console.log(topx, topy);
         }
     }
+    
+rgray = function(event){
+        count++
+        if(count%2 == 0){
+            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
+            console.log(bottom);
+            ungray([topx, topy],bottom);
+            count = 0
+            canvas.removeEventListener('click',gray);
+            canvas.removeEventListener('click',notgray);
+        }
+        else{
+            topx = event.pageX-canvas.offsetLeft;
+            topy = event.pageY-canvas.offsetTop;
+            console.log(topx, topy);
+}
 
-function grayout() {
+function removeGray(){
+        count = 0;
+        canvas.addEventListener('click', rgray);
+}
+
+function grayOut() {
         count = 0;
     document.getElementById("cursor").setAttribute("class", "crosshair");
         canvas.addEventListener('click', gray);
 }
 
-function notgrayout() {
+function notGrayOut() {
         count = 0;
     document.getElementById("cursor").setAttribute("class", "crosshair");
     canvas.addEventListener('click', notgray);    
@@ -153,6 +176,34 @@ function oppositeCrop(top,bottom){
     }
     ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
 }
+
+function ungray(top,bottom){
+    modified_image = image;
+    var imageData = ctx.getImageData(top[0],top[1],bottom[0],bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 255;
+    }
+    ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);  
+}
+
+function allGray(){
+    modified_image = image;
+    var imageData = ctx.getImageData(0,0,modified_image.width,modified_image.height);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i] = data[i];
+        data[i + 1] = data[i+1];
+        data[i + 2] = data[i+2];
+        data[i + 3] = 100;
+    }
+    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
+}
+    
 
 //----------------------------------------------------------------
 //  FILTER FUNCTIONS

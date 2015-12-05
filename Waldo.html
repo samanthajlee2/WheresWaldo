@@ -36,10 +36,13 @@
 
             <label><input class="checkboxes" type='checkbox' value="crop" onclick='crop(this);'>Mask Make Search Area Smaller</label> <br>
             
-            <button class='button' id="grayout" onclick='grayout()'>Gray Out Area</button><br>
+            <button class='button' id="grayout" onclick='grayOut()'>Gray Out Area</button><br>
             
-            <button class='button' id="notgrayout" onclick='notgrayout()'>Keep This Area</button><br>
+            <button class='button' id="removeGray" onclick='removeGray()'>Remove Gray</button><br>
+            
+            <button class='button' id="notgrayout" onclick='notGrayOut()'>Keep This Area</button><br>
 
+            <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
         
         </div>
 
