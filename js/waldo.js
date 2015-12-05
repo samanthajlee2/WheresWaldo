@@ -101,6 +101,7 @@ rgray = function(event){
             count = 0
             canvas.removeEventListener('click',gray);
             canvas.removeEventListener('click',notgray);
+            document.getElementById("cursor").setAttribute("class", "");
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -111,6 +112,7 @@ rgray = function(event){
 
 function removeGray(){
         count = 0;
+        document.getElementById("cursor").setAttribute("class", "crosshair");
         canvas.addEventListener('click', rgray);
 }
 
