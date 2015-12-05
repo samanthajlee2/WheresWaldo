@@ -1,12 +1,11 @@
 var image = null;          // The image that the user interacts with
 var modified_image = null;
-//var filters = {};   // The filters that the user has applied
 var ctx;            // canvas context
 var canvas;
 var filter = null;
 var val = 0;
 var safe_color = [0, 0, 0];
-var filters = [0, 0, 0]
+var filters = [false, false, false]
 var tests = [
     testForRed,
     testForBlue, 
@@ -27,7 +26,7 @@ window.onload = function() {
         // Resize the image and draw it at the origin
         canvas.width = image.width;
         canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
+        reset();
     }
     console.log("The image should show up now...");
 
@@ -42,13 +41,12 @@ function uploadpic() {
         // Resize the image and draw it at the origin
         canvas.width = image.width;
         canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
+        reset();
     }
 }
 
-function toggle(thing, num){
-    thing.value = Math.abs(thing.value-1);
-    filters[num] = thing.value;
+function updateCheckbox(thing, num){
+    filters[num] = thing.checked;
     filterAll();
 }
 
@@ -66,30 +64,40 @@ function testForYellow(col, hsl){
 
 function filterAll(){
     console.log("Running filters!");
-    modified_image = image;
-    imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
-
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
-        var rgb = [data[i], data[i+1], data[i+2]];
-        var test = false;
-        for (j = 0; j < filters.length; j ++) {
-            if (filters[j])
-                test = test || tests[j](rgb, hsl);
+    var no_filter_check = true;
+    ctx.drawImage(image, 0, 0);
+    for (i = 0; i < filters.length; i ++){
+        if (filters[i]){
+            no_filter_check = false;
+            break;
         }
-            if (test){
-                //data[i] = 0;
-                //data[i+1] = 0;
-                //data[i+2] = 0;
-            } 
-            else {
-              data[i]     = 255;     // red
-              data[i + 1] = 255;
-              data[i + 2] = 255;
+    } 
+    if (!no_filter_check){
+        modified_image = image;
+        imageData = ctx.getImageData(0,0,image.width, image.height);
+
+        var data = imageData.data;
+        for (var i = 0; i < data.length; i += 4) {
+            var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
+            var rgb = [data[i], data[i+1], data[i+2]];
+            var test = false;
+            for (j = 0; j < filters.length; j ++) {
+                if (filters[j])
+                    test = test || tests[j](rgb, hsl); 
             }
+                if (test){
+                    //data[i] = 0;
+                    //data[i+1] = 0;
+                    //data[i+2] = 0;
+                } 
+                else {
+                  data[i]     = 255;     // red
+                  data[i + 1] = 255;
+                  data[i + 2] = 255;
+                }
+        }
+        ctx.putImageData(imageData, 0, 0);
     }
-    ctx.putImageData(imageData, 0, 0);
 }
 
 
@@ -117,6 +125,13 @@ function rgbToHsl(r, g, b){
 
 function reset() {
     ctx.drawImage(image, 0, 0);
+    var elems = document.getElementsByClassName("filters")
+    for (i = 0; i < elems.length; i ++){
+        elems[i].checked = false;
+    }
+    for (i = 0; i < filters.length; i ++){
+        filters[i] = false;
+    }
 }
 
 
