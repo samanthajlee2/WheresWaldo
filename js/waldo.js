@@ -65,7 +65,6 @@ notgray = function(event){
             crop([topx, topy],bottom);
             count = 0
             canvas.removeEventListener('click', notgray);
-            canvas.removeEventListener('click', rgray);
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -101,8 +100,7 @@ rgray = function(event){
             document.getElementById("removeGray").innerHTML = "Remove Gray"; document.getElementById("cursor").setAttribute("class", "");
             ungray([topx, topy],bottom);
             count = 0
-            canvas.removeEventListener('click',gray);
-            canvas.removeEventListener('click',notgray);
+            canvas.removeEventListener('click',rgray);
         }
         else{
             topx = event.pageX-canvas.offsetLeft;
@@ -111,20 +109,27 @@ rgray = function(event){
         }
 }
 
+function cancelFunction(strOriginal, button, cursor, functionToCancel) {
+    button.innerHTML = strOriginal;
+    canvas.removeEventListener('click', functionToCancel);
+}
+
 function removeGray(){
+    
     count = 0;
-    var rGrayButton = document.getElementById("removeGray");
+    var button = document.getElementById("removeGray");
     var cursor = document.getElementById("cursor");
     var strCancel = "Click here to cancel";
     var strOriginal = "Remove Gray";
     
-    if(rGrayButton.innerHTML == strCancel){
-        rGrayButton.innerHTML = strOriginal;
+    cancelFunction("Gray Out Area", document.getElementById("grayOut"), cursor, gray);
+    
+    if(button.innerHTML == strCancel){
         cursor.setAttribute("class", "");
-        canvas.removeEventListener('click', rgray);
+        cancelFunction(strOriginal, button, cursor, rgray);
         
     } else {
-        rGrayButton.innerHTML = strCancel;
+        button.innerHTML = strCancel;
         cursor.setAttribute("class", "crosshair");
         canvas.addEventListener('click', rgray);
     }
@@ -132,18 +137,19 @@ function removeGray(){
 
 function grayOut() {
     count = 0;
-    var rGrayButton = document.getElementById("grayOut");
+    var button = document.getElementById("grayOut");
     var cursor = document.getElementById("cursor");
     var strCancel = "Click here to cancel";
     var strOriginal = "Gray Out Area";
     
-    if(rGrayButton.innerHTML == strCancel){
-        rGrayButton.innerHTML = strOriginal;
+    cancelFunction("Remove Gray", document.getElementById("removeGray"), cursor, rgray);
+    
+    if(button.innerHTML == strCancel){
         cursor.setAttribute("class", "");
-        canvas.removeEventListener('click', gray);
+        cancelFunction(strOriginal, button, cursor, gray);
         
     } else {
-        rGrayButton.innerHTML = strCancel;
+        button.innerHTML = strCancel;
         cursor.setAttribute("class", "crosshair");
         canvas.addEventListener('click', gray);
     }
