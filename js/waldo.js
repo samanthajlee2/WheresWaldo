@@ -16,25 +16,13 @@ var tests = [
     testForYellow
     ];
 
+
+//----------------------------------------------------------------
+//  INITIALIZATION
+//----------------------------------------------------------------
 window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
-        /*canvas.addEventListener('click', function(event){
-        count++
-        if(count%2 == 0){
-            bottom = [event.pageX-canvas.offsetLeft,event.pageY-canvas.offsetTop];
-            console.log(bottom);
-            crop([topx, topy],bottom);
-            count = 0
-        }
-        else{
-            topx = event.pageX-canvas.offsetLeft;
-            topy = event.pageY-canvas.offsetTop;
-            console.log(topx, topy);
-        }
-    });*/
-    //console.log(image.height);
-    //console.log(image.width);
     image = new Image();
     image.src = "img/puzzle.jpg";
     image.onload = function(){
@@ -44,10 +32,29 @@ window.onload = function() {
         canvas.height = image.height;
         reset();
     }
-    console.log("The image should show up now...");
-
+    console.log("Default image loaded.");
 }
 
+//----------------------------------------------------------------
+//  UPLOAD PICTURE
+//----------------------------------------------------------------
+
+function uploadpic() {
+    input_im = document.getElementById("inp");
+    console.log(input_im.value);
+    
+    image.src = 'img/' + input_im.value;
+    image.onload = function(){
+        // Resize the image and draw it at the origin
+        canvas.width = image.width;
+        canvas.height = image.height;
+        reset();
+    }
+}
+
+//----------------------------------------------------------------
+//  MASKING FUNCTIONS
+//----------------------------------------------------------------
 notgray = function(event){
         count++
         if(count%2 == 0){
@@ -94,18 +101,61 @@ function notgrayout() {
     canvas.addEventListener('click', notgray);    
 }
 
-function uploadpic() {
-    input_im = document.getElementById("inp");
-    console.log(input_im.value);
-    
-    image.src = 'img/' + input_im.value;
-    image.onload = function(){
-        // Resize the image and draw it at the origin
-        canvas.width = image.width;
-        canvas.height = image.height;
-        reset();
+
+function crop(top,bottom) {
+    modified_image = image;
+    imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
+    //copy pasta from alex's masking.js
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
     }
+    ctx.putImageData(imageData, 0, 0, 0, 0, top[0], modified_image.height);
+    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, top[1]);
+    var imageData = ctx.getImageData(top[0],bottom[1],modified_image.width,modified_image.height);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
+    }
+    ctx.putImageData(imageData, top[0],bottom[1], 0, 0, modified_image.width, modified_image.height);
+    
+            var imageData = ctx.getImageData(bottom[0],top[1],modified_image.width,bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
+    }
+    ctx.putImageData(imageData, bottom[0], top[1], 0, 0, modified_image.width, bottom[1]-top[1]);
 }
+
+function oppositeCrop(top,bottom){
+    modified_image = image;
+    var imageData = ctx.getImageData(top[0],top[1],bottom[0],bottom[1]);
+    console.log(imageData);
+    var data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+        data[i]     = data[i];     // red
+        data[i + 1] = data[i+1]; // green
+        data[i + 2] = data[i+2]; // blue
+        data[i + 3] = 100;
+    }
+    ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
+}
+
+//----------------------------------------------------------------
+//  FILTER FUNCTIONS
+//----------------------------------------------------------------
 
 function updateCheckbox(thing, num){
     filters[num] = thing.checked;
@@ -185,6 +235,11 @@ function rgbToHsl(r, g, b){
     return [h, s, l];
 }
 
+
+//----------------------------------------------------------------
+//  RESET FUNCTIONS
+//----------------------------------------------------------------
+
 function reset() {
     ctx.drawImage(image, 0, 0);
     var elems = document.getElementsByClassName("checkboxes")
@@ -194,77 +249,4 @@ function reset() {
     for (i = 0; i < filters.length; i ++){
         filters[i] = false;
     }
-}
-
-
-function onCheck(filter) {
-    if (filter.checked){
-        addFilter(filter.value);
-    } else {
-        removeFilter(filter.value);
-    }
-}
-
-function crop(top,bottom) {
-    modified_image = image;
-    imageData = ctx.getImageData(0,0,modified_image.width, modified_image.height);
-    //copy pasta from alex's masking.js
-    console.log(imageData);
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i];     // red
-        data[i + 1] = data[i+1]; // green
-        data[i + 2] = data[i+2]; // blue
-        data[i + 3] = 100;
-    }
-    ctx.putImageData(imageData, 0, 0, 0, 0, top[0], modified_image.height);
-    ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, top[1]);
-    var imageData = ctx.getImageData(top[0],bottom[1],modified_image.width,modified_image.height);
-    console.log(imageData);
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i];     // red
-        data[i + 1] = data[i+1]; // green
-        data[i + 2] = data[i+2]; // blue
-        data[i + 3] = 100;
-    }
-    ctx.putImageData(imageData, top[0],bottom[1], 0, 0, modified_image.width, modified_image.height);
-    
-            var imageData = ctx.getImageData(bottom[0],top[1],modified_image.width,bottom[1]);
-    console.log(imageData);
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i];     // red
-        data[i + 1] = data[i+1]; // green
-        data[i + 2] = data[i+2]; // blue
-        data[i + 3] = 100;
-    }
-    ctx.putImageData(imageData, bottom[0], top[1], 0, 0, modified_image.width, bottom[1]-top[1]);
-}
-
-function oppositeCrop(top,bottom){
-    modified_image = image;
-    var imageData = ctx.getImageData(top[0],top[1],bottom[0],bottom[1]);
-    console.log(imageData);
-    var data = imageData.data;
-    for (var i = 0; i < data.length; i += 4) {
-        data[i]     = data[i];     // red
-        data[i + 1] = data[i+1]; // green
-        data[i + 2] = data[i+2]; // blue
-        data[i + 3] = 100;
-    }
-    ctx.putImageData(imageData, top[0], top[1], 0, 0, bottom[0]-top[0], bottom[1]-top[1]);
-}
-
-function addFilter(filterName) {
-    if (filterName == "crop") {
-        crop();
-    } else {
-        alert("ADD filter: " + filterName);
-    }
-}
-
-
-function removeFilter(filterName) {
-    alert("REMOVE filter: " + filterName);
 }
