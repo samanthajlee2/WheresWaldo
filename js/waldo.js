@@ -8,12 +8,13 @@ var ctx;            // canvas context
 var canvas;
 var filter = null;
 var val = 0;
-var safe_color = [0, 0, 0];
-var filters = [false, false, false]
-var tests = [
-    testForRed,
-    testForBlue, 
-    testForYellow
+var safe_color = [255, 255, 255];
+var filter_ranges = [
+    // Each filter has an toggle boolean, upper value, lower value, 
+    // and inclusive/exclusive boolean flag
+    [false, 20, 340, false],
+    [false, 180, 280, true],
+    [false, 45, 110, true],
     ];
 
 
@@ -158,28 +159,26 @@ function oppositeCrop(top,bottom){
 //----------------------------------------------------------------
 
 function updateCheckbox(thing, num){
-    filters[num] = thing.checked;
+    filter_ranges[num][0] = thing.checked;
     filterAll();
 }
 
-function testForRed(col, hsl){
-    return (hsl[0] > 340/360 || hsl[0] < 20/360);
+function updateFilterRange(thing, num){
+    //filter_ranges_
 }
 
-function testForBlue(col, hsl){
-    return (hsl[0] > 180/360 && hsl[0] < 280/360);
-}
-
-function testForYellow(col, hsl){
-    return(hsl[0] > 45/360 && hsl[0] < 110/360);
+function filterTest(col, hsl, i){
+    return filter_ranges[i][3] == 
+            (hsl[0] > filter_ranges[i][1]/360 && 
+            hsl[0] < filter_ranges[i][2]/360);
 }
 
 function filterAll(){
     console.log("Running filters!");
     var no_filter_check = true;
     ctx.drawImage(image, 0, 0);
-    for (i = 0; i < filters.length; i ++){
-        if (filters[i]){
+    for (i = 0; i < filter_ranges.length; i ++){
+        if (filter_ranges[i][0]){
             no_filter_check = false;
             break;
         }
@@ -193,9 +192,9 @@ function filterAll(){
             var hsl = rgbToHsl(data[i], data[i+1], data[i+2]);
             var rgb = [data[i], data[i+1], data[i+2]];
             var test = false;
-            for (j = 0; j < filters.length; j ++) {
-                if (filters[j])
-                    test = test || tests[j](rgb, hsl); 
+            for (j = 0; j < filter_ranges.length; j ++) {
+                if (filter_ranges[j][0])
+                    test = test || filterTest(rgb, hsl, j); 
             }
                 if (test){
                     //data[i] = 0;
@@ -203,9 +202,9 @@ function filterAll(){
                     //data[i+2] = 0;
                 } 
                 else {
-                  data[i]     = 255;     // red
-                  data[i + 1] = 255;
-                  data[i + 2] = 255;
+                  data[i]     = safe_color[0];     // red
+                  data[i + 1] = safe_color[1];
+                  data[i + 2] = safe_color[2];
                 }
         }
         ctx.putImageData(imageData, 0, 0);
@@ -246,7 +245,7 @@ function reset() {
     for (i = 0; i < elems.length; i ++){
         elems[i].checked = false;
     }
-    for (i = 0; i < filters.length; i ++){
-        filters[i] = false;
+    for (i = 0; i < filter_ranges.length; i ++){
+        filter_ranges[i][0] = false;
     }
 }
