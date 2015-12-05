@@ -100,6 +100,7 @@ function filterAll(){
                     //data[i] = 0;
                     //data[i+1] = 0;
                     //data[i+2] = 0;
+                    //data[i+3] = 255;
                 } 
                 else {
                   data[i]     = 255;     // red
@@ -136,21 +137,14 @@ function rgbToHsl(r, g, b){
 
 function reset() {
     ctx.drawImage(image, 0, 0);
-    var elems = document.getElementsByClassName("filters")
+    var elems = document.getElementsByClassName("checkboxes")
     for (i = 0; i < elems.length; i ++){
+        //if (elems[i].checked) 
         elems[i].checked = false;
+        //elems[i].click();
     }
     for (i = 0; i < filters.length; i ++){
         filters[i] = false;
-    }
-}
-
-
-function onCheck(filter) {
-    if (filter.checked){
-        addFilter(filter.value);
-    } else {
-        removeFilter(filter.value);
     }
 }
 
