@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <head>
+        <link rel="shortcut icon" href="/img/waldoheadcon.ico" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="css/Waldo.css">
+        <script type="text/javascript" src="js/waldo.js"></script>
+        <script type="text/javascript" src="js/colorpicker.js"></script>
+
+        <title>
+            Where's Waldo
+        </title>
+    </head>
+    <body>
+        <h1>Here's Waldo!</h1>
+        
+        <div id="upload_css">
+            <input id="inp" type='file' value="puzzle.jpg"/>
+            <input type='button' value="submit" onclick='uploadpic();'/>
+        </div>
+        
+        <div id="filter_css">
+            <a id="infoheader" href="javascript: void(0);" onClick="toggleInstructions('info')">Hide Instructions</a>
+            <div id="info" class="instructions" style="display:block;">
+                Instructions lots of words! blah blah
+            </div>
+            
+            <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
+            <button class='button' id="resetcolors" value="ResetColors" onclick='resetColor()'>Reset - Colors</button><br>
+            <button class='button' id="resetmasks" value="ResetMasks" onclick='resetGray()'>Reset - Gray</button><br>
+            <hr class='divider'>
+
+            <div id="color-selector">
+                <div id="picker-wrapper">
+                    <div id="picker"></div>
+                    <div id="picker-indicator"></div>
+                </div>
+                <div id="slider-wrapper">
+                    <div id="slider"></div>
+                    <div id="slider-indicator"></div>
+                </div>
+            </div>
+            
+            <div id="colorfilter">
+                <label>
+                    <input class="checkboxes" autocomplete="off" 
+                           type='checkbox' onclick='updateCheckbox(this, 0);'>
+                        Show Red
+                </label>
+            </div>
+
+            <div id="colorfilter">
+                <label>
+                    <input class="checkboxes" autocomplete="off" 
+                              type='checkbox' onclick='updateCheckbox(this, 1);'>
+                    Show Blue
+                </label>
+            </div>
+
+            <div id="colorfilter">
+                <label>
+                    <input class="checkboxes" autocomplete="off" 
+                              type='checkbox' onclick='updateCheckbox(this, 2);'>
+                    Show Yellow
+                </label>
+            </div>
+
+            <div id="colorfilter">
+                <label>
+                    <input class="checkboxes" autocomplete="off" 
+                              type='checkbox' onclick='updateCheckbox(this, 3);'>
+                    Show Custom Color
+                </label> <br>
+                <button class='spbutton' onclick='updateHueRange(3,1)'>Select Upper Hue</button>
+                <button class='spbutton' onclick='updateHueRange(3,2)'>Select Lower Hue</button>    
+            </div>
+            
+            <p>
+                To use "Gray Out Area" and "Remove Grey" click desired button then click on the image the upper left and lower right to ...
+            </p>
+            
+
+            <button class='button' id="grayOut" onclick='grayOut()'>Gray Out Area</button><br>
+
+            <button class='button' id="removeGray" onclick='removeGray()'>Remove Gray</button><br>
+
+            <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
+
+            <div id="patternMatchingOptions">
+                Find with:
+                <select id="pmOption">
+                  <option value="edge">Edge</option>
+                  <option value="gray">Gray</option>
+                  <option value="color">Color</option>
+                </select> <br>
+                Threshold: (left for more possibilities, right for fewer possibilities)
+                <input id="threshold" type="range">
+                <button class='button' id='patternMatch' onclick='patternMatch();'>Here's Waldo!</button>
+            </div>
+        </div> <!--end of filters-->
+
+        <div id="puzzle_css">
+            <span id="cursor">
+                <canvas id="image_canvas"></canvas>
+            </span>
+        </div>
+    </body>
+</html>
