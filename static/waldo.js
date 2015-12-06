@@ -27,7 +27,7 @@ window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     image = new Image();
-    image.src = "img/same/puzzle.jpg";
+    image.src = "../static/img/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
         //ctx.scale(0.1, 0.1);
@@ -46,7 +46,7 @@ function uploadpic() {
     input_im = document.getElementById("inp");
     console.log(input_im.value);
     
-    image.src = 'img/same/' + input_im.value;
+    image.src = '../static/img/' + input_im.value;
     image.onload = function(){
         // Resize the image and draw it at the origin
         canvas.width = image.width;
