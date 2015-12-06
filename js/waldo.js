@@ -55,6 +55,20 @@ function uploadpic() {
 }
 
 //----------------------------------------------------------------
+//  PATTERN MATCHING
+//----------------------------------------------------------------
+
+function patternMatch() {
+    var pmOpt = document.getElementById("pmOption");
+    var threshold = document.getElementById("threshold");
+    //0 is edge
+    //1 is black and white
+    //2 color
+    console.log(pmOpt.selectedIndex);
+    console.log(threshold.value);
+}
+
+//----------------------------------------------------------------
 //  MASKING FUNCTIONS
 //----------------------------------------------------------------
 notgray = function(event){

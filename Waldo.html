@@ -43,9 +43,7 @@
                     <input class="checkboxes" autocomplete="off" 
                            type='checkbox' onclick='updateCheckbox(this, 0);'>
                         Show Red
-                </label><br>
-                <button onclick='updateHueRange(0,1)'>Select Lower Hue</button>
-                <button onclick='updateHueRange(0,2)'>Select Upper Hue</button>
+                </label>
             </div>
 
             <div id="colorfilter">
@@ -53,9 +51,7 @@
                     <input class="checkboxes" autocomplete="off" 
                               type='checkbox' onclick='updateCheckbox(this, 1);'>
                     Show Blue
-                </label> <br>
-                <button onclick='updateHueRange(1,1)'>Select Lower Hue</button>
-                <button onclick='updateHueRange(1,2)'>Select Upper Hue</button>
+                </label>
             </div>
 
             <div id="colorfilter">
@@ -63,9 +59,7 @@
                     <input class="checkboxes" autocomplete="off" 
                               type='checkbox' onclick='updateCheckbox(this, 2);'>
                     Show Yellow
-                </label> <br>
-                <button onclick='updateHueRange(2,1)'>Select Lower Hue</button>
-                <button onclick='updateHueRange(2,2)'>Select Upper Hue</button>
+                </label>
             </div>
 
             <div id="colorfilter">
@@ -74,10 +68,13 @@
                               type='checkbox' onclick='updateCheckbox(this, 2);'>
                     Show Custom Color
                 </label> <br>
-                <button onclick='updateHueRange(2,1)'>Select Lower Hue</button>
-                <button onclick='updateHueRange(2,2)'>Select Upper Hue</button>
+                <button class='spbutton' onclick='updateHueRange(2,2)'>Select Upper Hue</button>
+                <button class='spbutton' onclick='updateHueRange(2,1)'>Select Lower Hue</button>
             </div>
-
+            
+            <p>
+                To use "Gray Out Area" and "Remove Grey" click desired button then click on the image the upper left and lower right to ......
+            </p>
             
 
             <button class='button' id="grayOut" onclick='grayOut()'>Gray Out Area</button><br>
@@ -88,13 +85,14 @@
 
             <div id="patternMatchingOptions">
                 Find with:
-                <select>
+                <select id="pmOption">
                   <option value="edge">Edge</option>
                   <option value="gray">Gray</option>
                   <option value="color">Color</option>
                 </select> <br>
                 Threshold: (left for more possibilities, right for fewer possibilities)
                 <input id="threshold" type="range">
+                <button class='button' id='patternMatch' onclick='patternMatch();'>Here's Waldo!</button>
             </div>
         </div> <!--end of filters-->
         
