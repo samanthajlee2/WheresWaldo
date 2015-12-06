@@ -14,7 +14,8 @@ var filter_ranges = [
     // and inclusive/exclusive boolean flag
     [false, 340, 20],
     [false, 180, 280],
-    [false, 45, 110]
+    [false, 45, 110],
+    [false, 0, 255]
     ];
 var slider_hsv = null;
 
@@ -398,4 +399,17 @@ function resetGray(){
         data[i + 3] = 255;
     }
     ctx.putImageData(imageData, 0, 0, 0, 0, modified_image.width, modified_image.height);
+}
+
+
+function toggleInstructions(obj) {
+      var obj=document.getElementById(obj);
+      var obj2 = document.getElementById("infoheader");
+      if (obj.style.display == "block") {
+          obj2.innerHTML = "Show Instructions";
+          obj.style.display = "none";
+      } else {
+          obj2.innerHTML = "Hide Instructions";
+          obj.style.display = "block";
+      }
 }
