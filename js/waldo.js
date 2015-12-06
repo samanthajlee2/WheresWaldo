@@ -45,7 +45,7 @@ function uploadpic() {
     input_im = document.getElementById("inp");
     console.log(input_im.value);
     
-    image.src = 'img/' + input_im.value;
+    image.src = 'img/same/' + input_im.value;
     image.onload = function(){
         // Resize the image and draw it at the origin
         canvas.width = image.width;

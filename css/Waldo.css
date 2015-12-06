@@ -1,4 +1,5 @@
-#filter {
+
+#filter_css {
     width: 200px;
     float: left;
 }
