@@ -30,7 +30,7 @@ window.onload = function() {
     image.src = "img/same/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
-        ctx.scale(0.1, 0.1)
+        //ctx.scale(0.1, 0.1);
         canvas.width = image.width;
         canvas.height = image.height;
         reset();
