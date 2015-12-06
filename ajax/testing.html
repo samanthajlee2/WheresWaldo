@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+<head>
+
+
+
+</head>
+
+<body>
+
+
+<p>Heloo</p>
+
+<div><button type="button" onclick="run_fun()">run_fun</button></div>
+<div id ="content">Heloo</div>
+<div id ="content2">Heloo</div>
+
+<canvas id="image_canvas" width=1000 height=1000></canvas>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+function run_fun() {
+document.getElementById("content2").innerHTML = "whatesver";
+	 $.ajax({
+	 type: 'POST',
+	 url: "combine_test.py",
+	 data: {mess: "setoff"},
+	 dataType: 'html',
+	 success: function(data) {
+	 mylist = $(data).text().trim();
+	 console.log(mylist);
+	 document.getElementById("content").innerHTML = mylist[0];
+	 }
+	 });
+    
+}
+</script>
+
+<!-- <canvas id="image_canvas" width=1000 height=1000></canvas> -->
+
+</body>
+</html>
