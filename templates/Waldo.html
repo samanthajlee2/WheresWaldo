@@ -21,10 +21,6 @@
         </div>
         
         <div id="filter_css">
-            <a id="infoheader" href="javascript: void(0);" onClick="toggleInstructions('info')">Hide Instructions</a>
-            <div id="info" class="instructions" style="display:block;">
-                Instructions lots of words! blah blah
-            </div>
             
             <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
             <button class='button' id="resetcolors" value="ResetColors" onclick='resetColor()'>Reset - Colors</button><br>
@@ -76,9 +72,10 @@
                 <button class='spbutton' onclick='updateHueRange(3,2)'>Select Lower Hue</button>    
             </div>
             
-            <p>
+            <a id="infoheader" href="javascript: void(0);" onClick="toggleInstructions('info')">Hide Instructions</a>
+            <div id="info" class="instructions" style="display:block;">
                 To use "Gray Out Area" and "Remove Grey" click desired button then click on the image the upper left and lower right to ...
-            </p>
+            </div>
             
 
             <button class='button' id="grayOut" onclick='grayOut()'>Gray Out Area</button><br>
