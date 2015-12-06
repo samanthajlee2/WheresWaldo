@@ -5,6 +5,8 @@ print """Content-type: text/html; charset=utf-8\n\n
 field= cgi.FieldStorage()
 attr = field.getvalue("mymode", "error")
 
-print "hello"
+def foo():
+	print "phello"
+	return "hello"
 
 print """</html>"""

@@ -1,24 +1,28 @@
+/*top-right-bottom-left*/
+#upload_css {
+    margin-left: 200px;
+}
+
+#puzzle_css {
+    margin-left: 200px;
+    margin-top: 5px;
+}
 
 #filter_css {
     width: 200px;
     float: left;
+    margin-top: 20px;
 }
 
-#filter button {
-    margin: 0.15em;
+html {
+    background-color: #1f1f1f;
+    color: white;
 }
 
-#filter-buttons {
-    float: left;
-    width: 60%;
-    height: 100%;
-}
-
-#filter-controls {
-    float: left;
-}
-
-#greyout-buttons button {   
+h1 {
+    background-color: #1a1a1a;
+    align-content: center;
+    padding-left: 15px;
 }
 
 .button{
@@ -28,25 +32,6 @@
     width: 175px;
 }
 
-#puzzle_css {
-    margin-left: 200px;
-    margin-top: 5px;
-}
-
-#upload_css {
-    margin-left: 200px;
-}
-
-html {
-    background-color: #1f1f1f;
-    color: white;
-}
-
-h3 {
-    align-content: center;
-    padding-left: 5px;
-}
-
 .divider {
     margin-right: 10px;
     margin-left: 5px;
@@ -54,6 +39,17 @@ h3 {
 
 .crosshair {
     cursor: crosshair;
+}
+
+#colorfilter{
+    width: 170px;
+    margin: -25px 15px 30px 0px;
+    background-color: #101010;
+    align-content: center;
+}
+
+#color-selector {
+    margin: 0 0 0 180px;
 }
 
 #picker-wrapper {
@@ -79,9 +75,4 @@ h3 {
     height: 10%;
     position: absolute;
     border: 1px solid black;
-}
-
-#color-selector {
-    float: right;
-    width: 30%;
 }
