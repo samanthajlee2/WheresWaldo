@@ -12,9 +12,9 @@ var safe_color = [255, 255, 255];
 var filter_ranges = [
     // Each filter has an toggle boolean, upper value, lower value, 
     // and inclusive/exclusive boolean flag
-    [false, 20, 340, false],
-    [false, 180, 280, true],
-    [false, 45, 110, true],
+    [false, 340, 20],
+    [false, 180, 280],
+    [false, 45, 110]
     ];
 var slider_hsv = null;
 
@@ -252,14 +252,18 @@ function updateCheckbox(thing, num){
 
 // Update nth filter's mth value (upper or lower range) with the value
 // of the color picker
-function updateFilterRange(picker, n, m){
-    console.log(picker.toString());
+function updateHueRange(n, m){
+    filter_ranges[n][m] = slider_hsv['h'];
 }
 
 function filterTest(col, hsl, i){
-    return filter_ranges[i][3] == 
-            (hsl[0] > filter_ranges[i][1]/360 && 
-            hsl[0] < filter_ranges[i][2]/360);
+    if (filter_ranges[i][1] > filter_ranges[i][2]){
+        return (hsl[0] > filter_ranges[i][1]/360 || 
+        hsl[0] < filter_ranges[i][2]/360);
+    } else {
+        return (hsl[0] > filter_ranges[i][1]/360 && 
+        hsl[0] < filter_ranges[i][2]/360);
+    }
 }
 
 function filterAll(){

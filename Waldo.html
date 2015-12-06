@@ -7,34 +7,6 @@
         <link rel="stylesheet" type="text/css" href="css/Waldo.css">
         <script type="text/javascript" src="js/waldo.js"></script>
         <script type="text/javascript" src="js/colorpicker.js"></script>
-        <style type="text/css">
-
-            .picker-wrapper {
-                width: 0px;
-                height: 0px;
-                position: relative;
-                display: none;
-            }
-            .slider-wrapper {
-                width: 10px;
-                height: 50px;
-                position: relative;
-            }
-            .picker-indicator {
-                width: 0px;
-                height: 0px;
-                position: absolute;
-                border: 1px solid white;
-                display: none;
-            }
-            .slider-indicator {
-                width: 100%;
-                height: 10px;
-                position: absolute;
-                border: 1px solid black;
-                background-color: gray;
-            }
-        </style>
         <!--<script type="text/javascript" src="https://raw.githubusercontent.com/phoboslab/WebGLImageFilter/master/webgl-image-filter.js"></script>-->
 
         <title>
@@ -45,37 +17,54 @@
         <h3>Where's Waldo Assistant</h3>
         
         <div id="filter">
-            <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
-            <button class='button' id="resetcolors" value="ResetColors" onclick='resetColor()'>Reset - Colors</button><br>
-            <button class='button' id="resetmasks" value="ResetMasks" onclick='resetGray()'>Reset - Gray</button><br>
-            <hr class='divider'>
-            <div id="redblock">
-                <label>
-                <input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label><br>
-                Hue Range: <br>
-                <button>Select Lower Hue</button>
-                <button>Select Upper Hue</button>
-            </div><br>
-            <div id="blueblock">
-                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>
-                Hue Range: <br>
-                <button>Select Lower Hue</button>
-                <button>Select Upper Hue</button>
+            <div id="filter-controls">
+                <button class='button' id="Reset" value="Reset" onclick='reset()'>Reset All</button><br>
+                <button class='button' id="resetcolors" value="ResetColors" onclick='resetColor()'>Reset - Colors</button><br>
+                <button class='button' id="resetmasks" value="ResetMasks" onclick='resetGray()'>Reset - Gray</button><br>
+                <hr class='divider'>
+                <div id="filter-buttons"> 
+                    <div id="redblock">
+                        <label>
+                        <input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 0);'>Show Red</label><br>
+                        Hue Range: <br>
+                        <button onclick='updateHueRange(0,1)'>Select Lower Hue</button>
+                        <button onclick='updateHueRange(0,2)'>Select Upper Hue</button>
+                    </div><br>
+                    <div id="blueblock">
+                        <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 1);'>Show Blue</label> <br>
+                        Hue Range: <br>
+                        <button onclick='updateHueRange(1,1)'>Select Lower Hue</button>
+                        <button onclick='updateHueRange(1,2)'>Select Upper Hue</button>
+                    </div>
+                    <div id="yellowblock">
+                        <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 2);'>Show Yellow</label> <br>
+                        Hue Range: <br>
+                        <button onclick='updateHueRange(2,1)'>Select Lower Hue</button>
+                        <button onclick='updateHueRange(2,2)'>Select Upper Hue</button>
+                    </div>
+                </div>
+                <div id="color-selector">
+                    <div id="picker-wrapper">
+                        <div id="picker"></div>
+                        <div id="picker-indicator"></div>
+                    </div>
+                    <div id="slider-wrapper">
+                        <div id="slider"></div>
+                        <div id="slider-indicator"></div>
+                    </div>
+                </div>
+                    <!--<label><input class="checkboxes" type='checkbox' value="crop" onclick='crop(this);'>Mask Make Search Area Smaller</label> <br>-->
+                    <div id="greyout-buttons">
+                    <button class='button' id="grayOut" onclick='grayOut()'>Gray Out Area</button><br>
+                    
+                    <button class='button' id="removeGray" onclick='removeGray()'>Remove Gray</button><br>
+                    
+                    <!--<button class='button' id="notGrayOut" onclick='notGrayOut()' display='false'>Keep This Area</button><br>-->
+
+                    <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
+                </div>
             </div>
-            <div>
-                <label><input class="checkboxes" autocomplete="off" type='checkbox' onclick='updateCheckbox(this, 2);'>Show Yellow</label> <br>
-                Hue Range: <br>
-                <button>Select Lower Hue</button>
-                <button>Select Upper Hue</button>
-            </div>
-            <div class="picker-wrapper">
-                <div id="picker"></div>
-                <div id="picker-indicator"></div>
-            </div>
-            <div id="slider-wrapper">
-                <div id="slider"></div>
-                <div id="slider-indicator"></div>
-            </div>
+
 
             <div id="upload_css">
                 <input id="inp" type='file' value="puzzle.jpg"/>
@@ -90,16 +79,6 @@
             </span>
                 
             </div>
-
-            <!--<label><input class="checkboxes" type='checkbox' value="crop" onclick='crop(this);'>Mask Make Search Area Smaller</label> <br>-->
-            
-            <button class='button' id="grayOut" onclick='grayOut()'>Gray Out Area</button><br>
-            
-            <button class='button' id="removeGray" onclick='removeGray()'>Remove Gray</button><br>
-            
-            <!--<button class='button' id="notGrayOut" onclick='notGrayOut()' display='false'>Keep This Area</button><br>-->
-
-            <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
         
         </div>
     </body>
