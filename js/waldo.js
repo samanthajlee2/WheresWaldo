@@ -26,7 +26,7 @@ window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     image = new Image();
-    image.src = "img/puzzle.jpg";
+    image.src = "img/same/puzzle.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
         ctx.scale(0.1, 0.1)
