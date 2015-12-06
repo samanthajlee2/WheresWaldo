@@ -3,6 +3,23 @@
     float: left;
 }
 
+#filter button {
+    margin: 0.15em;
+}
+
+#filter-buttons {
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+
+#filter-controls {
+    float: left;
+}
+
+#greyout-buttons button {   
+}
+
 .button{
     background-color: lightgray;
     margin-bottom: 2px;
@@ -36,4 +53,34 @@ h3 {
 
 .crosshair {
     cursor: crosshair;
+}
+
+#picker-wrapper {
+    width: 0px;
+    height: 0px;
+    position: relative;
+    display: none;
+}
+#slider-wrapper {
+    width: 10px;
+    height: 30px;
+    position: relative;
+}
+#picker-indicator {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border: 1px solid white;
+    display: none;
+}
+#slider-indicator {
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    border: 1px solid black;
+}
+
+#color-selector {
+    float: right;
+    width: 30%;
 }
