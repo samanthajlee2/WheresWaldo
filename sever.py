@@ -12,7 +12,7 @@ def get_coords(puzname):
 	l_templates=[]
 	graybool= False
 	edgebool= False
-	threshold =0.5
+	threshold =	20.5
 	puzzle_name =puzname
 	for x in xrange(1,9):
 		name = "./static/img/puz"+str(x)+"_Q.jpg"
@@ -64,7 +64,7 @@ def my_link():
 
 if __name__ == '__main__':
 	app.debug = False
-	app.run(host='0.0.0.0')xw
+	app.run(host='0.0.0.0')
 
 
 
