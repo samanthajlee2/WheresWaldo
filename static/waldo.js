@@ -8,14 +8,14 @@ var ctx;            // canvas context
 var canvas;
 var filter = null;
 var val = 0;
-var safe_color = [255, 255, 255];
+var safe_color = [175, 175, 175];
 var filter_ranges = [
     // Each filter has an toggle boolean, upper value, lower value, 
     // and inclusive/exclusive boolean flag
     [false, 340, 20],
     [false, 180, 280],
     [false, 45, 110],
-    [false, 0, 255]
+    [false, 0, 125]
     ];
 var slider_hsv = null;
 
@@ -67,6 +67,8 @@ function highlightWaldos(coords) {
     }
 }
 
+//this function was taken and modified from flask documentation
+//http://flask.pocoo.org/docs/0.10/patterns/jquery/
 $(function() {
     var submit_form = function(e) {
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
@@ -75,7 +77,7 @@ $(function() {
         c: $('select[name="c"]').val()
       }, function(data) {
         $('#result').text(data.result);
-        alert(JSON.stringify(data.result));
+        //alert(JSON.stringify(data.result));
         console.log(JSON.stringify(data.result));
         var str = JSON.stringify(data.result);
         str = str.slice(1, str.length-1);
@@ -297,12 +299,16 @@ function updateHueRange(n, m){
 }
 
 function filterTest(col, hsl, i){
-    if (filter_ranges[i][1] > filter_ranges[i][2]){
-        return (hsl[0] > filter_ranges[i][1]/360 || 
-        hsl[0] < filter_ranges[i][2]/360);
+    if (i == 2){
+        return (hsl[2] > 0.9);
     } else {
-        return (hsl[0] > filter_ranges[i][1]/360 && 
-        hsl[0] < filter_ranges[i][2]/360);
+        if (filter_ranges[i][1] > filter_ranges[i][2]){
+            return (hsl[0] > filter_ranges[i][1]/360 || 
+            hsl[0] < filter_ranges[i][2]/360);
+        } else {
+            return (hsl[0] > filter_ranges[i][1]/360 && 
+            hsl[0] < filter_ranges[i][2]/360);
+        }
     }
 }
 
