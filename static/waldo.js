@@ -43,7 +43,7 @@ window.onload = function() {
 //----------------------------------------------------------------
 
 function uploadpic() {
-    input_im = document.getElementById("inp");
+    input_im = document.getElementById("inp_select");
     console.log(input_im.value);
     
     image.src = '../static/img/' + input_im.value;

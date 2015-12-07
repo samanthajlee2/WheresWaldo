@@ -16,9 +16,22 @@
         <h1>Here's Waldo!</h1>
         
         <div id="upload_css">
-            <input id="inp" type='file' value="puzzle.jpg"/>
-            <input type='button' value="submit" onclick='uploadpic();'/>
+		
+			<button class='button' id="inp" type='file' onclick='uploadpic();'>Choose Puzzle</button>
+            
+			<select  id="inp_select">
+			<option value="puz1.jpg">WaldoPuzzle1</option>
+			<option value="puz2.jpg">WaldoPuzzle2</option>
+			<option value="puz3.jpg">WaldoPuzzle3</option>
+			<option value="puz4.jpg">WaldoPuzzle4</option>
+			<option value="puz5.jpg">WaldoPuzzle5</option>
+			<option value="puz6.jpg">WaldoPuzzle6</option>
+			<option value="puz7.jpg">WaldoPuzzle7</option>
+			<option value="puz8.jpg">WaldoPuzzle8</option>
+			</select>
+			
         </div>
+		
         
         <div id="filter_css">
             
@@ -74,7 +87,7 @@
             
             <a id="infoheader" href="javascript: void(0);" onClick="toggleInstructions('info')">Hide Instructions</a>
             <div id="info" class="instructions" style="display:block;">
-                To use "Gray Out Area" and "Remove Grey" click desired button then click on the image the upper left and lower right to ...
+                Click the desired button, then the top left & bottom right of the area you want to change.
             </div>
             
 
