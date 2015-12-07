@@ -59,6 +59,13 @@ function uploadpic() {
 //  PATTERN MATCHING
 //----------------------------------------------------------------
 
+function highlightWaldos(coords) {
+  allGray();
+  for(var i = 0; i < coords.length; coords+=4){
+    removeGray([coords[i],coords[i+1]],[coords[i+2],coords[i+3]]);
+  }
+}
+
 $(function() {
     var submit_form = function(e) {
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
@@ -76,6 +83,7 @@ $(function() {
             nicedata[i] = parseInt(nicedata[i], 10);
         }
         console.log(nicedata);
+        highlightWaldos(nicedata);
         $('input[name=a]').focus().select();
       });
       return false;
