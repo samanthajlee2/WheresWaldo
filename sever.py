@@ -51,13 +51,16 @@ def get_coords(task,thresh,puzname):
         # puz = cv2.Canny(puz, 50, 200)
         result = cv2.matchTemplate(puz,template,cv2.TM_CCOEFF_NORMED)
         loc = np.where( result >= threshold)
-        
-        for pt in zip(*loc[::-1]):
-            # cv2.rectangle(puz, pt, (pt[0] + tW, pt[1] + tH), (0,0,255), 2)
-            res.append(pt[0])
-            res.append(pt[1])
-            res.append(pt[0]+tW)
-            res.append(pt[1]+tH)
+        print loc 
+
+        for y in range(9, 1, -1):
+			if y/10.0 >= threshold:
+				loc = np.where( (result >= (y/10.0))& (result <(((y+1)/10.0))) )
+		        for pt in zip(*loc[::-1]):
+		            res.append(pt[0])
+		            res.append(pt[1])
+		            res.append(pt[0]+tW)
+		            res.append(pt[1]+tH)
     return res
         # cv2.rectangle(orig, (maxLoc[0], maxLoc[1]),
         #   (maxLoc[0] + tW, maxLoc[1] + tH), (0, 0, 255), 2)
