@@ -1,10 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, request
 app = Flask(__name__)
 import numpy as np
 import argparse
 import imutils
 import glob
 import cv2
+
+
 
 
 
@@ -50,6 +52,18 @@ def get_coords(puzname):
 		# cv2.rectangle(orig, (maxLoc[0], maxLoc[1]),
 		# 	(maxLoc[0] + tW, maxLoc[1] + tH), (0, 0, 255), 2)
 	# cv2.imwrite("temp.jpg",puz)
+
+@app.route('/_add_numbers')
+def add_numbers():
+    """Add two numbers server side, ridiculous but well..."""
+    a = request.args.get('a', 0, type=int)
+    b = request.args.get('b', 0, type=int)
+    c = request.args.get('c', 0, type=str)
+    # return json.dump(bb)
+    return jsonify(result=[a,b,4,3,5,6,8,9,9,c])
+    # bb= [a,b]
+    # return jsonify(result=bb)
+
 
 @app.route('/')
 def index():

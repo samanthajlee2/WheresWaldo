@@ -4,7 +4,12 @@
     <meta content="utf-8" http-equiv="encoding">
     <head>
         <link rel="shortcut icon" href="/img/waldoheadcon.ico" type="image/x-icon" />
+        <script type="text/javascript"
+             src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../static/Waldo.css">
+        <script type="text/javascript">
+          var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
         <script type="text/javascript" src="{{ url_for('static', filename='waldo.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='colorpicker.js') }}"></script>
 
@@ -19,7 +24,7 @@
 		
 			<button class='button' id="inp" type='file' onclick='uploadpic();'>Choose Puzzle</button>
             
-			<select  id="inp_select">
+			<select  id="inp_select" name = "c">
 			<option value="puz1.jpg">WaldoPuzzle1</option>
 			<option value="puz2.jpg">WaldoPuzzle2</option>
 			<option value="puz3.jpg">WaldoPuzzle3</option>
@@ -99,14 +104,17 @@
 
             <div id="patternMatchingOptions">
                 Find with:
-                <select id="pmOption">
-                  <option value="edge">Edge</option>
-                  <option value="gray">Gray</option>
-                  <option value="color">Color</option>
+                <select id="pmOption" name = "a">
+                  <option value=0>Edge</option>
+                  <option value=1>Gray</option>
+                  <option value=2>Color</option>
                 </select> <br>
                 Threshold: (left for more possibilities, right for fewer possibilities)
-                <input id="threshold" type="range">
-                <button class='button' id='patternMatch' onclick='patternMatch();'>Here's Waldo!</button>
+                <input id="threshold" name = "b" type="range">
+                <!-- <button class='button' id='patternMatch' >Here's Waldo!</button> -->
+                <br>
+                <a href=# id="calculate">calculate server side</a>
+
             </div>
         </div> <!--end of filters-->
 

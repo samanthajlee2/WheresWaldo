@@ -59,15 +59,74 @@ function uploadpic() {
 //  PATTERN MATCHING
 //----------------------------------------------------------------
 
-function patternMatch() {
-    var pmOpt = document.getElementById("pmOption");
-    var threshold = document.getElementById("threshold");
-    //0 is edge
-    //1 is black and white
-    //2 color
-    console.log(pmOpt.selectedIndex);
-    console.log(threshold.value);
-}
+// function submit_form() {
+//     alert(":)")
+//       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+//         a: $('select[name="a"]').val(),
+//         b: $('input[name="b"]').val(),
+//         c: $('select[name="c"]').val()
+//       }, function(data) {
+//         $('#result').text(data.result);
+//         alert(data.result);
+
+//         $('input[name=a]').focus().select();
+//       });
+//       return false;
+//     $('a#calculate').bind('click', submit_form);
+//   }
+
+ // $(function() {
+ //    var submit_form = function(e) {
+ //        alert("hey sam!<):3")
+ //      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+ //        a: $('select[name="a"]').val(),
+ //        b: $('input[name="b"]').val(),
+ //        c: $('select[name="c"]').val()
+ //      }, function(data) {
+ //        $('#result').text(data.result);
+ //        alert(data.result);
+
+
+ //        $('input[name=a]').focus().select();
+ //      });
+ //      return false;
+ //    };    
+ //        alert("hey sam!<):)")
+
+ //    $('a#calculate').bind('click', submit_form);
+ //    $('input[name=a]').focus();
+ //  });
+
+$(function() {
+    var submit_form = function(e) {
+        alert("hey sam!<):3")
+        console.log("dhsofadshfo");
+      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+        a: $('select[name="a"]').val(),
+        b: $('input[name="b"]').val(),
+        c: "puzzle string"
+      }, function(data) {
+        $('#result').text(data.result);
+        console.log("ssssss");
+        alert("hehehe");
+        alert(data.result);
+
+
+        $('input[name=a]').focus().select();
+      });
+      console.log("s");
+        alert("hehe");
+      return false;
+    };
+    $('a#calculate').bind('click', submit_form);
+    $('input[type=text]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+        submit_form(e);
+      }
+    });
+    $('input[name=a]').focus();
+  });
+
 
 //----------------------------------------------------------------
 //  MASKING FUNCTIONS
