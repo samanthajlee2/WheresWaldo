@@ -60,10 +60,11 @@ function uploadpic() {
 //----------------------------------------------------------------
 
 function highlightWaldos(coords) {
-  allGray();
-  for(var i = 0; i < coords.length; coords+=4){
-    removeGray([coords[i],coords[i+1]],[coords[i+2],coords[i+3]]);
-  }
+    if (coords.length < 4) return;
+    allGray();
+    for(var i = 0; i < coords.length/4 && i < 20; i++){
+        ungray([coords[i*4],coords[i*4+1]],[coords[i*4+2],coords[i*4+3]]);
+    }
 }
 
 $(function() {
