@@ -67,6 +67,8 @@ function highlightWaldos(coords) {
     }
 }
 
+//this function was taken and modified from flask documentation
+//http://flask.pocoo.org/docs/0.10/patterns/jquery/
 $(function() {
     var submit_form = function(e) {
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
