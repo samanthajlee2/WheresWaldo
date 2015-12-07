@@ -27,7 +27,7 @@ window.onload = function() {
 	canvas = document.getElementById("image_canvas");
 	ctx = canvas.getContext('2d');
     image = new Image();
-    image.src = "../static/img/puzzle.jpg";
+    image.src = "../static/img/puz0.jpg";
     image.onload = function(){
         // Resize the image and draw it at the origin
         //ctx.scale(0.1, 0.1);
@@ -60,79 +60,36 @@ function uploadpic() {
 //----------------------------------------------------------------
 
 function highlightWaldos(coords) {
-  allGray();
-  for(var i = 0; i < coords.length; coords+=4){
-    removeGray([coords[i],coords[i+1]],[coords[i+2],coords[i+3]]);
-  }
+    if (coords.length < 4) return;
+    allGray();
+    for(var i = 0; i < coords.length/4 && i < 20; i++){
+        ungray([coords[i*4],coords[i*4+1]],[coords[i*4+2],coords[i*4+3]]);
+    }
 }
-
-
-// function submit_form() {
-//     alert(":)")
-//       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-//         a: $('select[name="a"]').val(),
-//         b: $('input[name="b"]').val(),
-//         c: $('select[name="c"]').val()
-//       }, function(data) {
-//         $('#result').text(data.result);
-//         alert(data.result);
-
-//         $('input[name=a]').focus().select();
-//       });
-//       return false;
-//     $('a#calculate').bind('click', submit_form);
-//   }
-
- // $(function() {
- //    var submit_form = function(e) {
- //        alert("hey sam!<):3")
- //      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
- //        a: $('select[name="a"]').val(),
- //        b: $('input[name="b"]').val(),
- //        c: $('select[name="c"]').val()
- //      }, function(data) {
- //        $('#result').text(data.result);
- //        alert(data.result);
-
-
- //        $('input[name=a]').focus().select();
- //      });
- //      return false;
- //    };    
- //        alert("hey sam!<):)")
-
- //    $('a#calculate').bind('click', submit_form);
- //    $('input[name=a]').focus();
- //  });
 
 $(function() {
     var submit_form = function(e) {
-        alert("hey sam!<):3")
-        console.log("dhsofadshfo");
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
         a: $('select[name="a"]').val(),
         b: $('input[name="b"]').val(),
-        c: "puzzle string"
+        c: $('select[name="c"]').val()
       }, function(data) {
         $('#result').text(data.result);
-        console.log("ssssss");
-        alert("hehehe");
-        alert(data.result);
-        nicedata = marksfunction(data.result);
+        alert(JSON.stringify(data.result));
+        console.log(JSON.stringify(data.result));
+        var str = JSON.stringify(data.result);
+        str = str.slice(1, str.length-1);
+        nicedata = str.split(',');
+        for (i = 0; i < nicedata.length; i++){
+            nicedata[i] = parseInt(nicedata[i], 10);
+        }
+        console.log(nicedata);
         highlightWaldos(nicedata);
-
         $('input[name=a]').focus().select();
       });
-      console.log("s");
-        alert("hehe");
       return false;
     };
     $('a#calculate').bind('click', submit_form);
-    $('input[type=text]').bind('keydown', function(e) {
-      if (e.keyCode == 13) {
-        submit_form(e);
-      }
-    });
     $('input[name=a]').focus();
   });
 
