@@ -10,11 +10,16 @@ import cv2
 
 
 
-def get_coords(puzname):
+def get_coords(task,thresh,puzname):
 	l_templates=[]
 	graybool= False
 	edgebool= False
-	threshold =	20.5
+	threshold=.6
+	if task==0:
+		edgebool=True
+	elif task ==1:
+		graybool = True
+	threshold =	thresh
 	puzzle_name =puzname
 	for x in xrange(1,9):
 		name = "./static/img/puz"+str(x)+"_Q.jpg"
@@ -60,7 +65,7 @@ def add_numbers():
     b = request.args.get('b', 0, type=int)
     c = request.args.get('c', 0, type=str)
     # return json.dump(bb)
-    return jsonify(result=[a,b,4,3,5,6,8,9,9,c])
+    return jsonify(result=get_coords(a,b/100,"./static/img/"+c))
     # bb= [a,b]
     # return jsonify(result=bb)
 
