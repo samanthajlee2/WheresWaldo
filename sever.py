@@ -7,9 +7,6 @@ import glob
 import cv2
 
 
-
-
-
 def get_coords(task,thresh,puzname):
     l_templates=[]
     graybool= False
@@ -24,7 +21,7 @@ def get_coords(task,thresh,puzname):
     else:
         threshold = thresh
     puzzle_name = puzname
-    for x in xrange(1,9):
+    for x in xrange(0,9):
         name = "./static/img/puz"+str(x)+"_Q.jpg"
         l_templates.append(cv2.imread(name))
     print(" I'm looking at puzzle: "+puzname+" with the query image: "+name)
