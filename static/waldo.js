@@ -59,71 +59,28 @@ function uploadpic() {
 //  PATTERN MATCHING
 //----------------------------------------------------------------
 
-// function submit_form() {
-//     alert(":)")
-//       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-//         a: $('select[name="a"]').val(),
-//         b: $('input[name="b"]').val(),
-//         c: $('select[name="c"]').val()
-//       }, function(data) {
-//         $('#result').text(data.result);
-//         alert(data.result);
-
-//         $('input[name=a]').focus().select();
-//       });
-//       return false;
-//     $('a#calculate').bind('click', submit_form);
-//   }
-
- // $(function() {
- //    var submit_form = function(e) {
- //        alert("hey sam!<):3")
- //      $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
- //        a: $('select[name="a"]').val(),
- //        b: $('input[name="b"]').val(),
- //        c: $('select[name="c"]').val()
- //      }, function(data) {
- //        $('#result').text(data.result);
- //        alert(data.result);
-
-
- //        $('input[name=a]').focus().select();
- //      });
- //      return false;
- //    };    
- //        alert("hey sam!<):)")
-
- //    $('a#calculate').bind('click', submit_form);
- //    $('input[name=a]').focus();
- //  });
-
 $(function() {
     var submit_form = function(e) {
-        alert("hey sam!<):3")
-        console.log("dhsofadshfo");
       $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
         a: $('select[name="a"]').val(),
         b: $('input[name="b"]').val(),
-        c: "puzzle string"
+        c: $('select[name="c"]').val()
       }, function(data) {
         $('#result').text(data.result);
-        console.log("ssssss");
-        alert("hehehe");
-        alert(data.result);
-
-
+        alert(JSON.stringify(data.result));
+        console.log(JSON.stringify(data.result));
+        var str = JSON.stringify(data.result);
+        str = str.slice(1, str.length-1);
+        nicedata = str.split(',');
+        for (i = 0; i < nicedata.length; i++){
+            nicedata[i] = parseInt(nicedata[i], 10);
+        }
+        console.log(nicedata);
         $('input[name=a]').focus().select();
       });
-      console.log("s");
-        alert("hehe");
       return false;
     };
     $('a#calculate').bind('click', submit_form);
-    $('input[type=text]').bind('keydown', function(e) {
-      if (e.keyCode == 13) {
-        submit_form(e);
-      }
-    });
     $('input[name=a]').focus();
   });
 
