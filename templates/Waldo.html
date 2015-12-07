@@ -91,8 +91,10 @@
                 <button class='spbutton' onclick='updateHueRange(3,2)'>Select Lower Hue</button>    
             </div>
             
-            <a id="infoheader" href="javascript: void(0);" onClick="toggleInstructions('info')">Hide Instructions</a>
-            <div id="info" class="instructions" style="display:block;">
+            <hr class='divider'>
+
+            <a id="instrheader" href="javascript: void(0);" onClick="toggleText('instr', 'instrheader', 'Show Instructions', 'Hide Instructions')">Show Instructions</a>
+            <div id="instr" class="instructions" style="display:none;">
                 Click the desired button, then the top left & bottom right of the area you want to change.
             </div>
             
@@ -103,14 +105,23 @@
 
             <button class='button' id="allGray" onclick='allGray()'>Gray Out Everything</button><br>
 
+            <hr class='divider'>
+
             <div id="patternMatchingOptions">
-                Find with:
+
+                <a id="infoheader" href="javascript: void(0);" onClick="toggleText('info', 'infoheader', 'Show Info', 'Hide Info')">Show Info</a>
+                <div id="info" class="instructions" style="display:none;">
+                    "Find by" options allow you to choose different ways of finding spots where Waldo might be. The threshold slider lets you pick how strict the matching will be. Move to the right for a higher threshold, and fewer spots that make it through. 
+                </div><br>
+
+                Find by 
                 <select id="pmOption" name = "a">
-                  <option value=0>Edge</option>
-                  <option value=1>Gray</option>
-                  <option value=2>Color</option>
+                  <option value=0>edges</option>
+                  <option value=1>gray</option>
+                  <option value=2>color</option>
                 </select> <br>
-                Threshold: (left for more possibilities, right for fewer possibilities)
+                
+                <p>Threshold:</p>
                 <input id="threshold" name = "b" type="range">
                 <!-- <button class='button' id='patternMatch' >Here's Waldo!</button> -->
                 <br>

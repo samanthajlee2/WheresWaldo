@@ -427,14 +427,17 @@ function resetGray(){
 }
 
 
-function toggleInstructions(obj) {
+//----------------------------------------------------------------
+//  MISC FUNCTIONS
+//----------------------------------------------------------------
+function toggleText(obj, strText, strShow, strHide) {
       var obj=document.getElementById(obj);
-      var obj2 = document.getElementById("infoheader");
+      var obj2 = document.getElementById(strText);
       if (obj.style.display == "block") {
-          obj2.innerHTML = "Show Instructions";
+          obj2.innerHTML = strShow;
           obj.style.display = "none";
       } else {
-          obj2.innerHTML = "Hide Instructions";
+          obj2.innerHTML = strHide;
           obj.style.display = "block";
       }
 }

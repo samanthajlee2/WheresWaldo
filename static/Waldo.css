@@ -25,11 +25,16 @@ h1 {
     padding-left: 15px;
 }
 
+a {
+    color: white;
+}
+
 p {
-    margin-top: -20px;
+    margin: 10px 0 0 0;
 }
 
 .button{
+    color: black;
     background-color: lightgray;
     margin-bottom: 2px;
     margin-left: 10px;
@@ -37,6 +42,7 @@ p {
 }
 
 .spbutton {
+    color: black;
     background-color: lightgray;
     margin-bottom: 2px;
     margin-left: 10px;
@@ -53,13 +59,14 @@ p {
 }
 
 .instructions {
-    margin-bottom: 5px;
+    margin: 0 3px 5px 0;
+    padding: 4px 3px 3px 3px;
+    background-color: #404040;
 }
 
 #colorfilter{
     width: 170px;
     margin: -25px 15px 30px 0px;
-    background-color: #101010;
     align-content: center;
 }
 
