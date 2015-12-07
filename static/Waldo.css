@@ -9,9 +9,15 @@
 }
 
 #filter_css {
+    position: fixed;
+    left: 0;
+    top: 120px;
+    background-color: #1f1f1f;
     width: 200px;
     float: left;
-    margin-top: -23px;
+    margin-top: -70px;
+    padding: 15px 2px 15px 2px;
+    border-radius: 10px;
 }
 
 html {
@@ -19,7 +25,7 @@ html {
     color: white;
 }
 
-h1 {
+h2 {
     background-color: #1a1a1a;
     align-content: center;
     padding-left: 15px;
@@ -49,6 +55,8 @@ p {
     width: 155px;
 }
 
+
+
 .divider {
     margin-right: 10px;
     margin-left: 5px;
@@ -60,6 +68,7 @@ p {
 
 .instructions {
     margin: 0 3px 5px 0;
+    width: 500px;
     padding: 4px 3px 3px 3px;
     background-color: #404040;
 }
@@ -67,6 +76,12 @@ p {
 #colorfilter{
     width: 170px;
     margin: -25px 15px 30px 0px;
+    align-content: center;
+}
+
+#colorfilterlast{
+    width: 170px;
+    margin: -25px 15px 5px 0px;
     align-content: center;
 }
 
