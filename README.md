@@ -1,7 +1,7 @@
 # WheresWaldo
 CG_F15
 
-Two options for using Here's Waldo!
+Two options for using Here's Waldo!<br>
 (1) open a browser (preferably firefox), go to markblanco.me:5000
 
 (2) to run it on your own machine
